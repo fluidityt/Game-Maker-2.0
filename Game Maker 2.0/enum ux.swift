@@ -20,10 +20,12 @@ enum ux {
              isInitialized: Bool = false
   
   static func initialize(scene: GameScene) {
-    currentScene = scene
     
     currentPrompt = Prompt(color: .white, size: CGSize(width: 300, height: 300))
     currentPrompt!.initialize(name: "Default Prompt")
+    
+    currentScene = scene
+    currentScene!.addChild(currentPrompt!)
     
     isInitialized = true
   }

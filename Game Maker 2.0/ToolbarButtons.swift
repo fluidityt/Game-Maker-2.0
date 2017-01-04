@@ -11,9 +11,9 @@ import SpriteKit
 
 // FIXME: Needs testing:
 fileprivate func failedErrorCheck(_ riskyPrompt: Prompt? = ux.currentPrompt) -> Bool {
-  guard let prompt = riskyPrompt else { print("found nil"); return true }
-  if prompt.isInitialized == false    { print("not init" ); return true }
-  else                                { print("good 2 go"); return false}
+  guard let prompt = riskyPrompt else { print("fec: found nil"); return true  }
+  if prompt.isInitialized == false    { print("fec: not init" ); return true  }
+  else                                { print("fec: good 2 go"); return false }
 }
 
 
@@ -32,26 +32,31 @@ final class ToolbarButtons {
       // defer { print(prompt.choices as Any) }
       
       guard let choiceCount = prompt.choices?.count else {
+        // First choice:
         prompt.choices = [choice]
-        print("prompt choices:", prompt.choices as Any)
+        prompt.addChild(choice)
+        choice.position.x -= 75
+        
         return true
       }
       
       if choiceCount < prompt.config_maxChoices {
         prompt.choices!.append(choice)
-        print("prompt choices:", prompt.choices as Any)
+        prompt.addChild(choice)
+        choice.position.x += 75
+        
         return true
       }
       
       else {
-        print("can't add any more choices to \(prompt.name)")
+        print("tbb: can't add any more choices to \(prompt.name)")
         return false
       }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
       var result = false
-      defer { result ? print("successfully added choice") : print("did not add choice!") }
+      defer { result ? print("tbb: successfully added choice") : print("tbb: did not add choice!") }
       if failedErrorCheck() { return }
       else { result = addChoice(to: ux.currentPrompt!) }
     }
