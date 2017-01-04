@@ -27,14 +27,19 @@ final class ToolbarButtons {
     
     // FIXME: Needs testing:
     func addChoice(to prompt: Prompt) -> DidSucceed {
+      let choice = Choice(color: .green, size: CGSize(width: 100, height: 50))
+      
+      // defer { print(prompt.choices as Any) }
       
       guard let choiceCount = prompt.choices?.count else {
-        prompt.addChoice()
+        prompt.choices = [choice]
+        print("prompt choices:", prompt.choices as Any)
         return true
       }
       
       if choiceCount < prompt.config_maxChoices {
-        prompt.addChoice()
+        prompt.choices!.append(choice)
+        print("prompt choices:", prompt.choices as Any)
         return true
       }
       
@@ -48,7 +53,7 @@ final class ToolbarButtons {
       var result = false
       defer { result ? print("successfully added choice") : print("did not add choice!") }
       if failedErrorCheck() { return }
-      result = addChoice(to: ux.currentPrompt!)
+      else { result = addChoice(to: ux.currentPrompt!) }
     }
   }
 }

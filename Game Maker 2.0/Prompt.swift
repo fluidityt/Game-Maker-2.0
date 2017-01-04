@@ -20,8 +20,8 @@ final class Prompt: SKSpriteNode, p_NeedsInitialization {
   let config_maxChoices: Int = 2
   
   // Will be modified from Toolbar.buttons[addChoiceButton] .addChoice() / .removeChoice()
-  var parentChoice: Choice?     // The one that leads to this prompt
-  var choices: [Choice]?        // The list of choices of this prompt
+  var parentChoice: Choice?     // The one that leads to this prompt.
+  var choices: [Choice]?        // The list of choices of this prompt.
   
   // INITIALIZE STUFF:
   var isInitialized: Bool = false
@@ -29,19 +29,6 @@ final class Prompt: SKSpriteNode, p_NeedsInitialization {
   func initialize(name: String) {
     self.name = name
     isInitialized = true
-  }
-  
-  // MARK: - << Choice manipulation >>
-  func addChoice() {
-    // calls gui element
-  }
-  
-  func editChoice() {
-    // calls gui element
-  }
-  
-  func deleteChoice() {
-    // removes gui element
   }
   
 }

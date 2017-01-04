@@ -15,11 +15,16 @@ protocol p_NeedsInitialization {
 enum ux {
   static var currentPrompt: Prompt?,
              currentScene:  GameScene?,
+             currentChoice: Choice?,
           // currentSelection: Something?
              isInitialized: Bool = false
   
   static func initialize(scene: GameScene) {
     currentScene = scene
+    
+    currentPrompt = Prompt(color: .white, size: CGSize(width: 300, height: 300))
+    currentPrompt!.initialize(name: "Default Prompt")
+    
     isInitialized = true
   }
 }
