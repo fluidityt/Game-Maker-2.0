@@ -36,25 +36,24 @@ final class Prompt: SKSpriteNode, p_NeedsInitialization {
 
 // MARK: - TOOLBARBUTTON.SWIFT
 
-fileprivate func failedInitializeCheck(_ prompt: Prompt) -> Bool {
-  guard prompt.isInitialized else {
-    print("prompt isn't initialized")
-    return true
-  }
-  return false
-}
+fileprivate var currentPrompt: Prompt?
 
+fileprivate func failedErrorCheck(_ riskyPrompt: Prompt? = currentPrompt) -> Bool {
+  guard let prompt = riskyPrompt else { print("found nil"); return true }
+  if prompt.isInitialized == false    { print("not init" ); return true }
+  else                                { print("good 2 go"); return false}
+}
 
 final class ToolbarButtons {
   
+  // Because we need more clarity:
   typealias DidSucceed = Bool
   
   final class AddChoice: SKSpriteNode {
     // add option to current prompt.
     
+    // FIXME: Needs testing:
     func addChoice(to prompt: Prompt) -> DidSucceed {
-
-      if failedInitializeCheck(prompt) { return false }
       
       if (prompt.currentNumChoices < prompt.config_maxChoices) {
         prompt.currentNumChoices += 1
@@ -69,7 +68,19 @@ final class ToolbarButtons {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    
+      
+      // Mutable for convenience:
+      var result = false
+      
+      defer { // Shows regardless of result of error check
+        result ? print("successfully added choice") : print("did not add choice!")
+      }
+      
+      // Determines whether we run .addChoice or not:
+      if failedErrorCheck() { return }
+      
+      // Possibly update our result from the default 'false' which will be called in defer:
+      result = addChoice(to: currentPrompt!)
     }
   }
 }
