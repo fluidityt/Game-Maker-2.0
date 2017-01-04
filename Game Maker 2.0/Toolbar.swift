@@ -105,7 +105,6 @@ final class Toolbar: SKSpriteNode, p_NeedsInitialization {
   enum ButtonNames { case addChoiceButton }
   var buttons: [ButtonNames: SKSpriteNode] = [:]
   
-  
   // Because too lazy to override inits and stuff:
   var isInitialized: Bool = false
   func initialize(scene: SKScene) {
@@ -113,18 +112,24 @@ final class Toolbar: SKSpriteNode, p_NeedsInitialization {
     // Prevent crashes:
     if ux.isInitialized == false { fatalError("not init") }
     let curScene = ux.currentScene!
-    
-    // Self stuff:
     curScene.addChild(self)
     
-    // Buttons:
-    buttons[.addChoiceButton] = ToolbarButtons.AddChoice(color: .blue, size: config_buttonSize)
-    addChild(buttons[.addChoiceButton]!)
     //    size = curScene.size (redundant?)
     // plist = loadPlist()
     // Load plist data for open or closed:
     // state = plist.state
-    isInitialized = true
+
+    buttonSetup: do {
+      ACB: do {
+        let acb = ToolbarButtons.AddChoice(color: .blue, size: config_buttonSize)
+        acb.position = CGPoint(x: frame.midX, y: frame.midY)
+        addChild(acb)
+        buttons[.addChoiceButton] = acb
+      }
+    }
+    
+
+        isInitialized = true
   }
   
   
