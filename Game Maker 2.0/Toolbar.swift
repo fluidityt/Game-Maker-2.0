@@ -10,6 +10,7 @@
 
 import SpriteKit
 
+// FIXME: Add a text support init for SKSpriteNode
 protocol p_NeedsInitialization {
   var isInitialized: Bool { get set }
 }
@@ -114,18 +115,23 @@ final class Toolbar: SKSpriteNode, p_NeedsInitialization {
     let curScene = ux.currentScene!
     curScene.addChild(self)
     
-    position.y = curScene.frame.midY
-    position.x = curScene.frame.maxX
-    position.x -= (frame.size.width / 2)
-    
-    // plist = loadPlist()
-    // Load plist data for open or closed:
-    // state = plist.state
+    selfConfig: do {
+      position.y = curScene.frame.midY
+      position.x = curScene.frame.maxX
+      position.x -= (frame.size.width / 2)
+      
+      isUserInteractionEnabled = true
+      
+      // plist = loadPlist()
+      // Load plist data for open or closed:
+      // state = plist.state
+    }
 
     buttonSetup: do {
       ACB: do {
         let acb = ToolbarButtons.AddChoice(color: .blue, size: config_buttonSize)
-        acb.position = CGPoint(x: frame.midX, y: frame.midY)
+        acb.position = CGPoint(x: 0, y: 0)
+        acb.isUserInteractionEnabled = true
         addChild(acb)
         buttons[.addChoiceButton] = acb
       }
@@ -133,6 +139,21 @@ final class Toolbar: SKSpriteNode, p_NeedsInitialization {
     
 
         isInitialized = true
+  }
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    // FIXME: Do proper math for the vectors...
+    let config_duration = 0.175
+    
+    switch state {
+      case .open:
+        run(.move(by: CGVector(dx:  125, dy: 0), duration: config_duration))
+        state = .closed
+      case .closed:
+        run(.move(by: CGVector(dx: -125, dy: 0), duration: config_duration))
+        state = .open
+      default: ()
+    }
   }
   
   

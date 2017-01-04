@@ -12,7 +12,7 @@ class GameScene: SKScene {
 
   override func didMove(to view: SKView) {
     ux.initialize(scene: self)
-    let toolbar = Toolbar(color: .green, size: CGSize(width: 125, height: 500))
+    let toolbar = Toolbar(color: .green, size: CGSize(width: 145, height: 500))
     toolbar.initialize(scene: self)
   }
   
