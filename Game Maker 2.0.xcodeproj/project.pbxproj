@@ -14,8 +14,10 @@
 		C158A4271E1CEAF300B7DE50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C158A4251E1CEAF300B7DE50 /* Main.storyboard */; };
 		C158A4291E1CEAF300B7DE50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C158A4281E1CEAF300B7DE50 /* Assets.xcassets */; };
 		C158A42C1E1CEAF300B7DE50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C158A42A1E1CEAF300B7DE50 /* LaunchScreen.storyboard */; };
-		C158A4351E1CEC7900B7DE50 /* func setUpGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C158A4341E1CEC7900B7DE50 /* func setUpGame.swift */; };
 		C158A4371E1CEE6600B7DE50 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C158A4361E1CEE6600B7DE50 /* Toolbar.swift */; };
+		C1FEE6771E1D4D9300642A5A /* ToolbarButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FEE6761E1D4D9200642A5A /* ToolbarButtons.swift */; };
+		C1FEE6791E1D4DD700642A5A /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FEE6781E1D4DD700642A5A /* Prompt.swift */; };
+		C1FEE67B1E1D4E1100642A5A /* enum ux.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FEE67A1E1D4E1100642A5A /* enum ux.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +30,10 @@
 		C158A4281E1CEAF300B7DE50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C158A42B1E1CEAF300B7DE50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C158A42D1E1CEAF300B7DE50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C158A4341E1CEC7900B7DE50 /* func setUpGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "func setUpGame.swift"; sourceTree = "<group>"; };
 		C158A4361E1CEE6600B7DE50 /* Toolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
+		C1FEE6761E1D4D9200642A5A /* ToolbarButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarButtons.swift; sourceTree = "<group>"; };
+		C1FEE6781E1D4DD700642A5A /* Prompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
+		C1FEE67A1E1D4E1100642A5A /* enum ux.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "enum ux.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,8 +68,7 @@
 			children = (
 				C158A4331E1CEC2A00B7DE50 /* junk */,
 				C158A4211E1CEAF300B7DE50 /* GameScene.swift */,
-				C158A4341E1CEC7900B7DE50 /* func setUpGame.swift */,
-				C158A4361E1CEE6600B7DE50 /* Toolbar.swift */,
+				C1FEE67C1E1D4E2D00642A5A /* Procedural files 1 */,
 			);
 			path = "Game Maker 2.0";
 			sourceTree = "<group>";
@@ -82,6 +85,17 @@
 				C158A42D1E1CEAF300B7DE50 /* Info.plist */,
 			);
 			name = junk;
+			sourceTree = "<group>";
+		};
+		C1FEE67C1E1D4E2D00642A5A /* Procedural files 1 */ = {
+			isa = PBXGroup;
+			children = (
+				C1FEE67A1E1D4E1100642A5A /* enum ux.swift */,
+				C1FEE6781E1D4DD700642A5A /* Prompt.swift */,
+				C1FEE6761E1D4D9200642A5A /* ToolbarButtons.swift */,
+				C158A4361E1CEE6600B7DE50 /* Toolbar.swift */,
+			);
+			name = "Procedural files 1";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,10 +173,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C158A4221E1CEAF300B7DE50 /* GameScene.swift in Sources */,
+				C1FEE6791E1D4DD700642A5A /* Prompt.swift in Sources */,
+				C1FEE67B1E1D4E1100642A5A /* enum ux.swift in Sources */,
 				C158A4241E1CEAF300B7DE50 /* GameViewController.swift in Sources */,
 				C158A4371E1CEE6600B7DE50 /* Toolbar.swift in Sources */,
-				C158A4351E1CEC7900B7DE50 /* func setUpGame.swift in Sources */,
 				C158A41C1E1CEAF300B7DE50 /* AppDelegate.swift in Sources */,
+				C1FEE6771E1D4D9300642A5A /* ToolbarButtons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +344,7 @@
 				C158A4321E1CEAF300B7DE50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
