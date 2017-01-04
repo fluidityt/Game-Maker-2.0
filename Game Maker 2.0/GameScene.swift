@@ -8,9 +8,12 @@
 
 import SpriteKit
 
+var gView: SKView?
+
 class GameScene: SKScene {
 
   override func didMove(to view: SKView) {
+    gView = view
     anchorPoint = CGPoint(x: 0.5, y: 0.5)
     ux.initialize(scene: self)
     let toolbar = Toolbar(color: .green, size: CGSize(width: 145, height: 500))

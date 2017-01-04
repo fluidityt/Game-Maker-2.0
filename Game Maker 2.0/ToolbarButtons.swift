@@ -25,30 +25,33 @@ final class ToolbarButtons {
   // Add option to current prompt:
   final class AddChoice: SKSpriteNode {
     
+    static var id = 1
+    typealias  this = ToolbarButtons.AddChoice
+    
+    var name2: String? = "default choice"
+    
     // FIXME: Needs testing:
     func addChoice(to prompt: Prompt) -> DidSucceed {
-      let choice = Choice(color: .green, size: CGSize(width: 100, height: 50))
       
-      // defer { print(prompt.choices as Any) }
-      
-      guard let choiceCount = prompt.choices?.count else {
-        // First choice:
+      let choice = Choice(texture: labelToTex(text: "choice \(this.id)", color: .black),
+                          size: CGSize(width: 100, height: 50))
+      // Choice(color: .green, size: CGSize(width: 100, height: 50))
+
+      guard let choiceCount = prompt.choices?.count else {  // First choice:
         prompt.choices = [choice]
         prompt.addChild(choice)
         choice.position.x -= 75
-        
         return true
       }
       
-      if choiceCount < prompt.config_maxChoices {
+      if choiceCount < prompt.config_maxChoices {  // Subsequent choices:
         prompt.choices!.append(choice)
         prompt.addChild(choice)
         choice.position.x += 75
-        
         return true
       }
       
-      else {
+      else {  // Max choices:
         print("tbb: can't add any more choices to \(prompt.name)")
         return false
       }
@@ -59,6 +62,7 @@ final class ToolbarButtons {
       defer { result ? print("tbb: successfully added choice") : print("tbb: did not add choice!") }
       if failedErrorCheck() { return }
       else { result = addChoice(to: ux.currentPrompt!) }
+      if result { this.id += 1 }
     }
   }
 }
