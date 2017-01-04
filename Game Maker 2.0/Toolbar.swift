@@ -50,7 +50,6 @@ final class Prompt: SKSpriteNode, p_NeedsInitialization {
 
 // MARK: - TOOLBARBUTTON.SWIFT
 
-
 // FIXME: Needs testing:
 fileprivate func failedErrorCheck(_ riskyPrompt: Prompt? = ux.currentPrompt) -> Bool {
   guard let prompt = riskyPrompt else { print("found nil"); return true }
@@ -95,6 +94,9 @@ final class ToolbarButtons {
 
 final class Toolbar: SKSpriteNode, p_NeedsInitialization {
   
+  // Because we need a global config and lazy:
+  let config_buttonSize = CGSize(width: 100, height: 100)
+  
   // We need to keep track of UI visibility:
   enum State { case open, closed, hidden }
   var state: State = .open
@@ -103,15 +105,22 @@ final class Toolbar: SKSpriteNode, p_NeedsInitialization {
   enum ButtonNames { case addChoiceButton }
   var buttons: [ButtonNames: SKSpriteNode] = [:]
   
+  
   // Because too lazy to override inits and stuff:
   var isInitialized: Bool = false
   func initialize(scene: SKScene) {
+  
     // Prevent crashes:
     if ux.isInitialized == false { fatalError("not init") }
     let curScene = ux.currentScene!
     
-    size = curScene.size
+    // Self stuff:
     curScene.addChild(self)
+    
+    // Buttons:
+    buttons[.addChoiceButton] = ToolbarButtons.AddChoice(color: .blue, size: config_buttonSize)
+    addChild(buttons[.addChoiceButton]!)
+    //    size = curScene.size (redundant?)
     // plist = loadPlist()
     // Load plist data for open or closed:
     // state = plist.state
