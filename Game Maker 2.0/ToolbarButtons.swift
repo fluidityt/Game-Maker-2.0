@@ -24,16 +24,17 @@ final class ToolbarButtons {
  
   // Add option to current prompt:
   final class AddChoice: SKSpriteNode {
+
+    typealias  this = ToolbarButtons.AddChoice
     
     static var id = 1
-    typealias  this = ToolbarButtons.AddChoice
     
     var name2: String? = "default choice"
     
     // FIXME: Needs testing:
     func addChoice(to prompt: Prompt) -> DidSucceed {
       
-      let choice = Choice(texture: labelToTex(text: "choice \(this.id)", color: .black),
+      let choice = Choice(texture: textToTexture(text: "choice \(this.id)", color: .black),
                           size: CGSize(width: 100, height: 50))
       // Choice(color: .green, size: CGSize(width: 100, height: 50))
 

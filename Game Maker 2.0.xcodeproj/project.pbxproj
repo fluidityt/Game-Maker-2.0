@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C1012BCC1E1D6DEF00157D6A /* func labelToTex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1012BCB1E1D6DEF00157D6A /* func labelToTex.swift */; };
+		C1012BCC1E1D6DEF00157D6A /* func textToTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1012BCB1E1D6DEF00157D6A /* func textToTexture.swift */; };
+		C1012BCE1E1D766000157D6A /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1012BCD1E1D766000157D6A /* Keyboard.swift */; };
+		C1012BD01E1D7A2B00157D6A /* TODO.rtf in Resources */ = {isa = PBXBuildFile; fileRef = C1012BCF1E1D7A2B00157D6A /* TODO.rtf */; };
 		C158A41C1E1CEAF300B7DE50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C158A41B1E1CEAF300B7DE50 /* AppDelegate.swift */; };
 		C158A4201E1CEAF300B7DE50 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = C158A41F1E1CEAF300B7DE50 /* Actions.sks */; };
 		C158A4221E1CEAF300B7DE50 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C158A4211E1CEAF300B7DE50 /* GameScene.swift */; };
@@ -22,7 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C1012BCB1E1D6DEF00157D6A /* func labelToTex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "func labelToTex.swift"; sourceTree = "<group>"; };
+		C1012BCB1E1D6DEF00157D6A /* func textToTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "func textToTexture.swift"; sourceTree = "<group>"; };
+		C1012BCD1E1D766000157D6A /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+		C1012BCF1E1D7A2B00157D6A /* TODO.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = TODO.rtf; path = "Game Maker 2.0/TODO.rtf"; sourceTree = "<group>"; };
 		C158A4181E1CEAF300B7DE50 /* Game Maker 2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Game Maker 2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C158A41B1E1CEAF300B7DE50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C158A41F1E1CEAF300B7DE50 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -52,8 +56,10 @@
 		C158A40F1E1CEAF300B7DE50 = {
 			isa = PBXGroup;
 			children = (
+				C1012BCF1E1D7A2B00157D6A /* TODO.rtf */,
 				C158A41A1E1CEAF300B7DE50 /* Game Maker 2.0 */,
 				C158A4191E1CEAF300B7DE50 /* Products */,
+				C158A4331E1CEC2A00B7DE50 /* junk */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,9 +74,9 @@
 		C158A41A1E1CEAF300B7DE50 /* Game Maker 2.0 */ = {
 			isa = PBXGroup;
 			children = (
-				C158A4331E1CEC2A00B7DE50 /* junk */,
 				C158A4211E1CEAF300B7DE50 /* GameScene.swift */,
-				C1012BCB1E1D6DEF00157D6A /* func labelToTex.swift */,
+				C1012BCD1E1D766000157D6A /* Keyboard.swift */,
+				C1012BCB1E1D6DEF00157D6A /* func textToTexture.swift */,
 				C1FEE67C1E1D4E2D00642A5A /* Procedural files 1 */,
 			);
 			path = "Game Maker 2.0";
@@ -88,6 +94,7 @@
 				C158A42D1E1CEAF300B7DE50 /* Info.plist */,
 			);
 			name = junk;
+			path = "Game Maker 2.0";
 			sourceTree = "<group>";
 		};
 		C1FEE67C1E1D4E2D00642A5A /* Procedural files 1 */ = {
@@ -161,6 +168,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1012BD01E1D7A2B00157D6A /* TODO.rtf in Resources */,
 				C158A4271E1CEAF300B7DE50 /* Main.storyboard in Resources */,
 				C158A4291E1CEAF300B7DE50 /* Assets.xcassets in Resources */,
 				C158A42C1E1CEAF300B7DE50 /* LaunchScreen.storyboard in Resources */,
@@ -175,10 +183,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1012BCC1E1D6DEF00157D6A /* func labelToTex.swift in Sources */,
+				C1012BCC1E1D6DEF00157D6A /* func textToTexture.swift in Sources */,
 				C158A4221E1CEAF300B7DE50 /* GameScene.swift in Sources */,
 				C1FEE6791E1D4DD700642A5A /* Prompt.swift in Sources */,
 				C1FEE67B1E1D4E1100642A5A /* enum ux.swift in Sources */,
+				C1012BCE1E1D766000157D6A /* Keyboard.swift in Sources */,
 				C158A4241E1CEAF300B7DE50 /* GameViewController.swift in Sources */,
 				C158A4371E1CEE6600B7DE50 /* Toolbar.swift in Sources */,
 				C158A41C1E1CEAF300B7DE50 /* AppDelegate.swift in Sources */,
