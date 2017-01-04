@@ -114,7 +114,10 @@ final class Toolbar: SKSpriteNode, p_NeedsInitialization {
     let curScene = ux.currentScene!
     curScene.addChild(self)
     
-    //    size = curScene.size (redundant?)
+    position.y = curScene.frame.midY
+    position.x = curScene.frame.maxX
+    position.x -= (frame.size.width / 2)
+    
     // plist = loadPlist()
     // Load plist data for open or closed:
     // state = plist.state
