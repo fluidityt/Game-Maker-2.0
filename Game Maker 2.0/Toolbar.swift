@@ -14,6 +14,21 @@ protocol p_NeedsInitialization {
   var isInitialized: Bool { get set }
 }
 
+// Because we need a global state namespace:
+enum ux {
+  static var currentPrompt: Prompt?,
+             currentScene:  GameScene?,
+          // currentSelection: Something?
+             isInitialized: Bool = false
+  
+  static func initialize(scene: GameScene) {
+    currentScene = scene
+    isInitialized = true
+  }
+}
+
+// MARK: - PROMPT.SWIFT
+
 // The visible node that will export to swift code:
 final class Prompt: SKSpriteNode, p_NeedsInitialization {
   
@@ -22,7 +37,6 @@ final class Prompt: SKSpriteNode, p_NeedsInitialization {
   
   // Will be modified from Toolbar.buttons[addChoiceButton] .addChoice() / .removeChoice()
   var currentNumChoices: Int = 0
-  
   
   // INITIALIZE STUFF:
   var isInitialized: Bool = false
@@ -36,9 +50,9 @@ final class Prompt: SKSpriteNode, p_NeedsInitialization {
 
 // MARK: - TOOLBARBUTTON.SWIFT
 
-fileprivate var currentPrompt: Prompt?
 
-fileprivate func failedErrorCheck(_ riskyPrompt: Prompt? = currentPrompt) -> Bool {
+// FIXME: Needs testing:
+fileprivate func failedErrorCheck(_ riskyPrompt: Prompt? = ux.currentPrompt) -> Bool {
   guard let prompt = riskyPrompt else { print("found nil"); return true }
   if prompt.isInitialized == false    { print("not init" ); return true }
   else                                { print("good 2 go"); return false}
@@ -47,11 +61,10 @@ fileprivate func failedErrorCheck(_ riskyPrompt: Prompt? = currentPrompt) -> Boo
 // NOTE: Subclasses' respective same-named function will run on overriden touchesBegan().
 final class ToolbarButtons {
   
-  // Because we need more clarity:
   typealias DidSucceed = Bool
-  
+ 
+  // Add option to current prompt:
   final class AddChoice: SKSpriteNode {
-    // add option to current prompt.
     
     // FIXME: Needs testing:
     func addChoice(to prompt: Prompt) -> DidSucceed {
@@ -72,7 +85,7 @@ final class ToolbarButtons {
       var result = false
       defer { result ? print("successfully added choice") : print("did not add choice!") }
       if failedErrorCheck() { return }
-      result = addChoice(to: currentPrompt!)
+      result = addChoice(to: ux.currentPrompt!)
     }
   }
 }
@@ -80,26 +93,29 @@ final class ToolbarButtons {
 
 // MARK: - TOOLBAR.SWIFT
 
-final class Toolbar: SKSpriteNode {
-
+final class Toolbar: SKSpriteNode, p_NeedsInitialization {
+  
   // We need to keep track of UI visibility:
-  private enum State { case open, closed, hidden }
-  private var state: State = .open
+  enum State { case open, closed, hidden }
+  var state: State = .open
   
   // We need to be able to display buttons in correct order and position:
   enum ButtonNames { case addChoiceButton }
   var buttons: [ButtonNames: SKSpriteNode] = [:]
   
   // Because too lazy to override inits and stuff:
+  var isInitialized: Bool = false
   func initialize(scene: SKScene) {
-    
     // Prevent crashes:
-    if self.scene != nil { scene.addChild(self) }
+    if ux.isInitialized == false { fatalError("not init") }
+    let curScene = ux.currentScene!
     
+    size = curScene.size
+    curScene.addChild(self)
     // plist = loadPlist()
     // Load plist data for open or closed:
     // state = plist.state
-    
+    isInitialized = true
   }
   
   
