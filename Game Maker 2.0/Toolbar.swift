@@ -44,6 +44,7 @@ fileprivate func failedErrorCheck(_ riskyPrompt: Prompt? = currentPrompt) -> Boo
   else                                { print("good 2 go"); return false}
 }
 
+// NOTE: Subclasses' respective same-named function will run on overriden touchesBegan().
 final class ToolbarButtons {
   
   // Because we need more clarity:
@@ -68,18 +69,9 @@ final class ToolbarButtons {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-      
-      // Mutable for convenience:
       var result = false
-      
-      defer { // Shows regardless of result of error check
-        result ? print("successfully added choice") : print("did not add choice!")
-      }
-      
-      // Determines whether we run .addChoice or not:
+      defer { result ? print("successfully added choice") : print("did not add choice!") }
       if failedErrorCheck() { return }
-      
-      // Possibly update our result from the default 'false' which will be called in defer:
       result = addChoice(to: currentPrompt!)
     }
   }
