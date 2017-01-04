@@ -8,7 +8,9 @@ import SpriteKit
 
 func textToTexture(text: String,
                    color: SKColor = SKColor.black,
-                   bordered: Bool = true) -> SKTexture {
+                   bordered: Bool = true,
+                   borderColor: SKColor = SKColor.yellow) -> SKTexture {
+  
   
   let returnNode = SKNode()
   
@@ -16,11 +18,16 @@ func textToTexture(text: String,
   tempLabel.fontColor = color
   tempLabel.verticalAlignmentMode = .center
   
-  let tempBox   = SKShapeNode(rectOf: tempLabel.frame.size)
-  tempBox.strokeColor = .blue
+  if bordered {
+    let tempBox   = SKShapeNode(rectOf: tempLabel.frame.size)
+    tempBox.strokeColor = borderColor
   
-  tempBox.addChild(tempLabel)
+    tempLabel.setScale(0.9) // To make it fit.
+    
+    tempBox.addChild(tempLabel)
+    returnNode.addChild(tempBox)
+  } else { returnNode.addChild(tempLabel) }
   
-  return gView!.texture(from: tempBox)!
+  return gView!.texture(from: returnNode)!
   //  return gView!.texture(from: tempLabel)!
 }
