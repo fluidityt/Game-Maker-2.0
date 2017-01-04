@@ -28,9 +28,13 @@ final class ToolbarButtons {
     // FIXME: Needs testing:
     func addChoice(to prompt: Prompt) -> DidSucceed {
       
-      if (prompt.currentNumChoices < prompt.config_maxChoices) {
-        prompt.currentNumChoices += 1
-        // TODO: Do other gui stuff here later on
+      guard let choiceCount = prompt.choices?.count else {
+        prompt.addChoice()
+        return true
+      }
+      
+      if choiceCount < prompt.config_maxChoices {
+        prompt.addChoice()
         return true
       }
       
