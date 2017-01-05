@@ -61,8 +61,10 @@ final class ToolbarButtons {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
       var result = false
       defer { result ? print("tbb: successfully added choice") : print("tbb: did not add choice!") }
+      
       if failedErrorCheck() { return }
-      else { result = addChoice(to: ux.currentPrompt!) }
+      else                  { result = addChoice(to: ux.currentPrompt!) }
+      
       if result { this.id += 1 }
     }
   }

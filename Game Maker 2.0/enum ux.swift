@@ -17,17 +17,45 @@ enum ux {
              currentScene:  GameScene?,
              currentChoice: Choice?,
           // currentSelection: Something?
+             highlightNode: SKShapeNode?,
+             toolbar:       Toolbar?,
              isInitialized: Bool = false
+  
+  static func highlight(_ node: SKSpriteNode) {
+    
+    print("hiliting b4 guard")
+    guard isInitialized else { print("ux: not init"); return }
+    
+    highlightNode!.removeFromParent() ;
+    highlightNode = SKShapeNode(rectOf: node.frame.size)
+    highlightNode?.strokeColor = .blue
+    node.addChild(highlightNode!)     ;
+    //highlightNode!.position = CGPoint.zero
+  }
   
   static func initialize(scene: GameScene) {
     
-    currentPrompt = Prompt(color: .white, size: CGSize(width: 300, height: 300))
-    currentPrompt!.initialize(name: "Default Prompt")
+    // FIXME: Initial prompt:
+    let prompt = Prompt(color: .white, size: CGSize(width: 300, height: 300))
+    prompt.initialize(name: "Default Prompt")
     
-    currentScene = scene
-    currentScene!.addChild(currentPrompt!)
+    let highlight = SKShapeNode(rectOf: scene.frame.size)
+    highlight.strokeColor = .blue
     
+    scene.addChild(prompt)
+    scene.addChild(highlight)
+    
+    currentPrompt = prompt
+    currentScene  = scene
+    highlightNode = highlight
+
     isInitialized = true
+    
+    // FIXME: Make more isInitialized types
+    let toolbar = Toolbar(color: .green, size: CGSize(width: 145, height: 500))
+    toolbar.initialize(scene: scene)
+    
   }
+  
 }
 
