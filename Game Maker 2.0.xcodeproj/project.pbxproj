@@ -10,6 +10,7 @@
 		C1012BCC1E1D6DEF00157D6A /* func textToTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1012BCB1E1D6DEF00157D6A /* func textToTexture.swift */; };
 		C1012BCE1E1D766000157D6A /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1012BCD1E1D766000157D6A /* Keyboard.swift */; };
 		C1012BD01E1D7A2B00157D6A /* TODO.rtf in Resources */ = {isa = PBXBuildFile; fileRef = C1012BCF1E1D7A2B00157D6A /* TODO.rtf */; };
+		C142770E1E1E772B00B72B92 /* UTILITY.swift in Sources */ = {isa = PBXBuildFile; fileRef = C142770D1E1E772B00B72B92 /* UTILITY.swift */; };
 		C158A41C1E1CEAF300B7DE50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C158A41B1E1CEAF300B7DE50 /* AppDelegate.swift */; };
 		C158A4201E1CEAF300B7DE50 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = C158A41F1E1CEAF300B7DE50 /* Actions.sks */; };
 		C158A4221E1CEAF300B7DE50 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C158A4211E1CEAF300B7DE50 /* GameScene.swift */; };
@@ -27,6 +28,7 @@
 		C1012BCB1E1D6DEF00157D6A /* func textToTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "func textToTexture.swift"; sourceTree = "<group>"; };
 		C1012BCD1E1D766000157D6A /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		C1012BCF1E1D7A2B00157D6A /* TODO.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = TODO.rtf; path = "Game Maker 2.0/TODO.rtf"; sourceTree = "<group>"; };
+		C142770D1E1E772B00B72B92 /* UTILITY.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UTILITY.swift; sourceTree = "<group>"; };
 		C158A4181E1CEAF300B7DE50 /* Game Maker 2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Game Maker 2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C158A41B1E1CEAF300B7DE50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C158A41F1E1CEAF300B7DE50 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				C158A4211E1CEAF300B7DE50 /* GameScene.swift */,
 				C1012BCD1E1D766000157D6A /* Keyboard.swift */,
 				C1012BCB1E1D6DEF00157D6A /* func textToTexture.swift */,
+				C142770D1E1E772B00B72B92 /* UTILITY.swift */,
 				C1FEE67C1E1D4E2D00642A5A /* Procedural files 1 */,
 			);
 			path = "Game Maker 2.0";
@@ -185,6 +188,7 @@
 			files = (
 				C1012BCC1E1D6DEF00157D6A /* func textToTexture.swift in Sources */,
 				C158A4221E1CEAF300B7DE50 /* GameScene.swift in Sources */,
+				C142770E1E1E772B00B72B92 /* UTILITY.swift in Sources */,
 				C1FEE6791E1D4DD700642A5A /* Prompt.swift in Sources */,
 				C1FEE67B1E1D4E1100642A5A /* enum ux.swift in Sources */,
 				C1012BCE1E1D766000157D6A /* Keyboard.swift in Sources */,
