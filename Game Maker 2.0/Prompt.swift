@@ -10,9 +10,15 @@ import SpriteKit
 final class Choice: SKSpriteNode, p_NeedsInitialization {
   //  let config_size = CGSize(width: 100, height: 50)
   var isInitialized: Bool = false
-
+  
+  func initialize() {
+    isUserInteractionEnabled = true
+    isInitialized = true
+  }
+  
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     ux.currentChoice = self
+    ux.highlight(self)
   }
 }
 // The visible node that will export to swift code:
@@ -32,11 +38,11 @@ final class Prompt: SKSpriteNode, p_NeedsInitialization {
   func initialize(name: String) {
     self.name = name
     isUserInteractionEnabled = true
+    zPosition = 1     // FIXME: WTF DOES THIS DO IT??
     isInitialized = true
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    print("hi")
     ux.currentPrompt = self
     ux.highlight(self)
   }

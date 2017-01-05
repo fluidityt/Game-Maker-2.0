@@ -21,6 +21,12 @@ enum ux {
              toolbar:       Toolbar?,
              isInitialized: Bool = false
   
+  static func unselect() {
+    currentPrompt = nil
+    currentChoice = nil
+    highlightNode!.removeFromParent()
+  }
+  
   static func highlight(_ node: SKSpriteNode) {
     
     print("hiliting b4 guard")
@@ -34,13 +40,13 @@ enum ux {
   }
   
   static func initialize(scene: GameScene) {
-    
+
     // FIXME: Initial prompt:
     let prompt = Prompt(color: .white, size: CGSize(width: 300, height: 300))
     prompt.initialize(name: "Default Prompt")
+  
     
     let highlight = SKShapeNode(rectOf: scene.frame.size)
-    highlight.strokeColor = .blue
     
     scene.addChild(prompt)
     scene.addChild(highlight)

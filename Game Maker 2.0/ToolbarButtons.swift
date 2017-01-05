@@ -34,10 +34,12 @@ final class ToolbarButtons {
     // FIXME: Needs testing:
     func addChoice(to prompt: Prompt) -> DidSucceed {
       
-      let choice = Choice(texture: textToTexture(text: "choice \(this.id)", color: .black),
-                          size: CGSize(width: 100, height: 50))
-      // Choice(color: .green, size: CGSize(width: 100, height: 50))
+      let choice = Choice(texture: textToTexture( text: "choice \(this.id)", color: .black),
+                          size:    CGSize( width: 100, height: 50) )
+      choice.initialize()
 
+      guard choice.isInitialized else { print("ac: not init"); return false }
+      
       guard let choiceCount = prompt.choices?.count else {  // First choice:
         prompt.choices = [choice]
         prompt.addChild(choice)
