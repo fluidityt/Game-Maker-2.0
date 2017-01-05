@@ -18,7 +18,7 @@ fileprivate func failedErrorCheck(_ riskyPrompt: Prompt? = ux.currentPrompt) -> 
 
 
 // NOTE: Subclasses' respective same-named function will run on overriden touchesBegan().
-final class ToolbarButtons {
+enum ToolbarButtons {
   
   typealias DidSucceed = Bool
  
@@ -43,14 +43,18 @@ final class ToolbarButtons {
       guard let choiceCount = prompt.choices?.count else {  // First choice:
         prompt.choices = [choice]
         prompt.addChild(choice)
+        
         choice.position.x -= 75
+        choice.touch()
         return true
       }
       
       if choiceCount < prompt.config_maxChoices {  // Subsequent choices:
         prompt.choices!.append(choice)
         prompt.addChild(choice)
+        
         choice.position.x += 75
+        choice.touch()
         return true
       }
       
@@ -65,7 +69,7 @@ final class ToolbarButtons {
       defer { result ? print("tbb: successfully added choice") : print("tbb: did not add choice!") }
       
       if failedErrorCheck() { return }
-      else                  { result = addChoice(to: ux.currentPrompt!) }
+      else { result = addChoice(to: ux.currentPrompt!) }
       
       if result { this.id += 1 }
     }

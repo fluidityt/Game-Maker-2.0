@@ -19,8 +19,6 @@ class GameScene: SKScene {
     view.layer.cornerRadius = view.frame.size.width/2
     anchorPoint = CGPoint(x: 0.5, y: 0.5)
     ux.initialize(scene: self)
-    
-
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -32,31 +32,30 @@ enum ux {
     print("hiliting b4 guard")
     guard isInitialized else { print("ux: not init"); return }
     
-    highlightNode!.removeFromParent() ;
+    if highlightNode!.parent != nil { highlightNode!.removeFromParent() }
     highlightNode = SKShapeNode(rectOf: node.frame.size)
-    highlightNode?.strokeColor = .blue
-    node.addChild(highlightNode!)     ;
-    //highlightNode!.position = CGPoint.zero
+    highlightNode!.lineWidth = 5
+    highlightNode!.strokeColor = .blue
+    node.addChild(highlightNode!)
   }
   
   static func initialize(scene: GameScene) {
 
     // FIXME: Initial prompt:
+    let highlightN = SKShapeNode(rectOf: scene.frame.size)
+    scene.addChild(highlightN)
+    highlightNode = highlightN
+
     let prompt = Prompt(color: .white, size: CGSize(width: 300, height: 300))
     prompt.initialize(name: "Default Prompt")
-  
-    
-    let highlight = SKShapeNode(rectOf: scene.frame.size)
-    
     scene.addChild(prompt)
-    scene.addChild(highlight)
-    
     currentPrompt = prompt
-    currentScene  = scene
-    highlightNode = highlight
 
-    isInitialized = true
+    currentScene  = scene
     
+    isInitialized = true
+    highlight(prompt)
+
     // FIXME: Make more isInitialized types
     let toolbar = Toolbar(color: .green, size: CGSize(width: 145, height: 500))
     toolbar.initialize(scene: scene)

@@ -15,10 +15,14 @@ final class Choice: SKSpriteNode, p_NeedsInitialization {
     isUserInteractionEnabled = true
     isInitialized = true
   }
-  
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+  func touch() {
     ux.currentChoice = self
+    if let parentPrompt = parent { ux.currentPrompt = (parentPrompt as! Prompt) }
+    else { fatalError("choice: no parent found for choice") }
     ux.highlight(self)
+  }
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+   touch()
   }
 }
 // The visible node that will export to swift code:
