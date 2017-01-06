@@ -13,6 +13,7 @@ final class Choice: SKSpriteNode, p_NeedsInitialization {
   
   func initialize() {
     isUserInteractionEnabled = true
+    zPosition = 1
     isInitialized = true
   }
   

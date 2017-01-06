@@ -9,6 +9,9 @@
 import Foundation
 import  SpriteKit
 
+//
+// TODO: Add a text support init for SKSpriteNode
+//
 
 extension CGRect {
   var center: CGPoint { return CGPoint(x: midX, y: midY) }

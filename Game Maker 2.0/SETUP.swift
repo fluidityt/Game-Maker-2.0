@@ -8,12 +8,12 @@
 
 import SpriteKit
 
-// GLOBALS
-var gView: SKView?
-var gScene: GameScene?
+// GLOBALS:
+enum g {
+  static var view: SKView?,
+             scene: GameScene?
+}
 
-
-// FIXME: Add a text support init for SKSpriteNode
 protocol p_NeedsInitialization {
   var isInitialized: Bool { get set }
 }
@@ -29,6 +29,7 @@ protocol p_HasState {
   func touchAdvance()
 }
 
+// TODO: Should I put this in the ux place?
 enum UXState {
     case detail,    // Brings up detail screen.
          overview,  // Drag n drop, etc.

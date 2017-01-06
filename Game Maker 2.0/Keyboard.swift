@@ -16,12 +16,12 @@ class Keyboard: SKSpriteNode, p_NeedsInitialization {
   var isInitialized: Bool = false
 
   func initialize() {
-    // TODO: make a fucking letter class ffs lazzzzyfyyyy
+    /*// TODO: make a fucking letter class ffs lazzzzyfyyyy
     let a = SKSpriteNode(texture: textToTexture(text: "A"))
     a.name = "a" 
     let s = SKSpriteNode(texture: textToTexture(text: "s"))
     let d = SKSpriteNode(texture: textToTexture(text: "d"))
-    let f = SKSpriteNode(texture: textToTexture(text: "f"))
+    let f = SKSpriteNode(texture: textToTexture(text: "f"))*/
   }
   
 }

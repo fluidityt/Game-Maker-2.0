@@ -9,7 +9,7 @@ import SpriteKit
 
 // MARK: - TOOLBARBUTTON.SWIFT
 
-// FIXME: Needs testing:
+// FIXME: Where does this belong?
 fileprivate func failedErrorCheck(_ riskyPrompt: Prompt? = ux.currentPrompt) -> Bool {
   guard let prompt = riskyPrompt else { print("fec: found nil"); return true  }
   if prompt.isInitialized == false    { print("fec: not init" ); return true  }
@@ -30,8 +30,12 @@ enum ToolbarButtons {
     
     var name2: String? = "default choice"
     
-    // FIXME: Needs testing:
     func addChoice(to prompt: Prompt) -> DidSucceed {
+      // TODO: << Too much logic.. needs declarative >>
+      
+      // FIXME: I don't know what I'm doing with this yet...
+      guard let state = ux.currentState else { fatalError("ac: How did we get nil?") }
+      guard state == .overview else { print("ac: wrong state"); return false }
       
       let choice = Choice(texture: textToTexture( text: "choice \(this.id)", color: .black),
                           size:    CGSize( width: 100, height: 50) )
@@ -44,7 +48,7 @@ enum ToolbarButtons {
         prompt.addChild(choice)
         
         choice.position.x -= 75
-        choice.touch()
+        choice.touchOverview()
         return true
       }
       
@@ -53,7 +57,7 @@ enum ToolbarButtons {
         prompt.addChild(choice)
         
         choice.position.x += 75
-        choice.touch()
+        choice.touchOverview()
         return true
       }
       

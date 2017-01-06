@@ -11,8 +11,8 @@ import SpriteKit
 class GameScene: SKScene {
   
   override func didMove(to view: SKView) {
-    gView = view
-    gScene = self
+    g.view = view
+    g.scene = self
     view.layer.cornerRadius = view.frame.size.width/2
     anchorPoint = CGPoint(x: 0.5, y: 0.5)
     ux.initialize(scene: self)

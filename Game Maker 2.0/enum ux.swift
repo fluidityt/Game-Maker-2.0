@@ -49,6 +49,8 @@ enum ux: p_NeedsStaticInitialization {
     scene.addChild(prompt)
     currentPrompt = prompt
 
+    currentState = UXState.overview
+    
     currentScene  = scene
     
     isInitialized = true

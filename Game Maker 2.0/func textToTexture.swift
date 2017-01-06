@@ -11,7 +11,6 @@ func textToTexture(text: String,
                    bordered: Bool = true,
                    borderColor: SKColor = SKColor.yellow) -> SKTexture {
   
-  
   let returnNode = SKNode()
   
   let tempLabel = SKLabelNode(text: text)
@@ -28,6 +27,7 @@ func textToTexture(text: String,
     returnNode.addChild(tempBox)
   } else { returnNode.addChild(tempLabel) }
   
-  return gView!.texture(from: returnNode)!
-  //  return gView!.texture(from: tempLabel)!
+  if let view = g.view {
+    return view.texture(from: returnNode)!
+  } else { fatalError("ttt: view not found") }
 }

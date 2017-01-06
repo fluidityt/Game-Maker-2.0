@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C1012BCC1E1D6DEF00157D6A /* FUNC textToTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1012BCB1E1D6DEF00157D6A /* FUNC textToTexture.swift */; };
+		C1012BCC1E1D6DEF00157D6A /* func textToTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1012BCB1E1D6DEF00157D6A /* func textToTexture.swift */; };
 		C1012BCE1E1D766000157D6A /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1012BCD1E1D766000157D6A /* Keyboard.swift */; };
 		C1012BD01E1D7A2B00157D6A /* TODO.rtf in Resources */ = {isa = PBXBuildFile; fileRef = C1012BCF1E1D7A2B00157D6A /* TODO.rtf */; };
 		C1423E471E1F8AFD00B7AFBE /* DESIGN.sks in Resources */ = {isa = PBXBuildFile; fileRef = C1423E461E1F8AFD00B7AFBE /* DESIGN.sks */; };
@@ -28,7 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C1012BCB1E1D6DEF00157D6A /* FUNC textToTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FUNC textToTexture.swift"; sourceTree = "<group>"; };
+		C1012BCB1E1D6DEF00157D6A /* func textToTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "func textToTexture.swift"; sourceTree = "<group>"; };
 		C1012BCD1E1D766000157D6A /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		C1012BCF1E1D7A2B00157D6A /* TODO.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = TODO.rtf; path = "Game Maker 2.0/TODO.rtf"; sourceTree = "<group>"; };
 		C1423E461E1F8AFD00B7AFBE /* DESIGN.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = DESIGN.sks; path = "Game Maker 2.0/DESIGN.sks"; sourceTree = "<group>"; };
@@ -85,7 +85,7 @@
 			children = (
 				C158A4211E1CEAF300B7DE50 /* GameScene.swift */,
 				C1012BCD1E1D766000157D6A /* Keyboard.swift */,
-				C1012BCB1E1D6DEF00157D6A /* FUNC textToTexture.swift */,
+				C1012BCB1E1D6DEF00157D6A /* func textToTexture.swift */,
 				C1423E4A1E1FA26100B7AFBE /* SETUP.swift */,
 				C142770D1E1E772B00B72B92 /* UTILITY.swift */,
 				C1FEE67C1E1D4E2D00642A5A /* Procedural files 1 */,
@@ -196,7 +196,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1012BCC1E1D6DEF00157D6A /* FUNC textToTexture.swift in Sources */,
+				C1012BCC1E1D6DEF00157D6A /* func textToTexture.swift in Sources */,
 				C158A4221E1CEAF300B7DE50 /* GameScene.swift in Sources */,
 				C142770E1E1E772B00B72B92 /* UTILITY.swift in Sources */,
 				C1FEE6791E1D4DD700642A5A /* Prompt.swift in Sources */,
