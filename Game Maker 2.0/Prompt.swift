@@ -23,7 +23,7 @@ final class Prompt: SKSpriteNode, p_NeedsInitialization {
   func initialize(name: String) {
     self.name = name
     isUserInteractionEnabled = true
-    zPosition = 1     // FIXME: WTF DOES THIS DO IT??
+    zPosition = 1     // FIXME: << WTF DOES THIS DO IT??
     isInitialized = true
   }
   
