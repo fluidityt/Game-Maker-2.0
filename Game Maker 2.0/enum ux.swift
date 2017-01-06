@@ -13,9 +13,20 @@ protocol p_NeedsInitialization {
 
 // Because we need a global state namespace:
 enum ux {
+  
+  enum State {
+    case detail,    // Brings up detail screen.
+         overview,  // Drag n drop, etc.
+         multi,     // Multiple-select.
+         advance    // Cinema-style.
+  }
+
+  
   static var currentPrompt: Prompt?,
              currentScene:  GameScene?,
              currentChoice: Choice?,
+             currentState:  State?,
+  
           // currentSelection: Something?
              highlightNode: SKShapeNode?,
              toolbar:       Toolbar?,

@@ -6,25 +6,6 @@
 
 import SpriteKit
 
-// MARK: - PROMPT.SWIFT
-final class Choice: SKSpriteNode, p_NeedsInitialization {
-  //  let config_size = CGSize(width: 100, height: 50)
-  var isInitialized: Bool = false
-  
-  func initialize() {
-    isUserInteractionEnabled = true
-    isInitialized = true
-  }
-  func touch() {
-    ux.currentChoice = self
-    if let parentPrompt = parent { ux.currentPrompt = (parentPrompt as! Prompt) }
-    else { fatalError("choice: no parent found for choice") }
-    ux.highlight(self)
-  }
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-   touch()
-  }
-}
 // The visible node that will export to swift code:
 final class Prompt: SKSpriteNode, p_NeedsInitialization {
   
