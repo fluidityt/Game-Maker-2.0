@@ -22,7 +22,7 @@
 		C158A42C1E1CEAF300B7DE50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C158A42A1E1CEAF300B7DE50 /* LaunchScreen.storyboard */; };
 		C158A4371E1CEE6600B7DE50 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C158A4361E1CEE6600B7DE50 /* Toolbar.swift */; };
 		C16B919D1E1FADDE001B1FC1 /* FUNC testLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16B919C1E1FADDE001B1FC1 /* FUNC testLine.swift */; };
-		C16B919F1E1FAE29001B1FC1 /* zFUNC textToTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16B919E1E1FAE29001B1FC1 /* zFUNC textToTexture.swift */; };
+		C16B919F1E1FAE29001B1FC1 /* FUNC textToTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16B919E1E1FAE29001B1FC1 /* FUNC textToTexture.swift */; };
 		C1FEE6771E1D4D9300642A5A /* ToolbarButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FEE6761E1D4D9200642A5A /* ToolbarButtons.swift */; };
 		C1FEE6791E1D4DD700642A5A /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FEE6781E1D4DD700642A5A /* Prompt.swift */; };
 		C1FEE67B1E1D4E1100642A5A /* enum ux.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FEE67A1E1D4E1100642A5A /* enum ux.swift */; };
@@ -46,7 +46,7 @@
 		C158A42D1E1CEAF300B7DE50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C158A4361E1CEE6600B7DE50 /* Toolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		C16B919C1E1FADDE001B1FC1 /* FUNC testLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FUNC testLine.swift"; sourceTree = "<group>"; };
-		C16B919E1E1FAE29001B1FC1 /* zFUNC textToTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "zFUNC textToTexture.swift"; sourceTree = "<group>"; };
+		C16B919E1E1FAE29001B1FC1 /* FUNC textToTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FUNC textToTexture.swift"; sourceTree = "<group>"; };
 		C1FEE6761E1D4D9200642A5A /* ToolbarButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarButtons.swift; sourceTree = "<group>"; };
 		C1FEE6781E1D4DD700642A5A /* Prompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
 		C1FEE67A1E1D4E1100642A5A /* enum ux.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "enum ux.swift"; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 				C158A4211E1CEAF300B7DE50 /* GameScene.swift */,
 				C1012BCD1E1D766000157D6A /* Keyboard.swift */,
 				C16B919C1E1FADDE001B1FC1 /* FUNC testLine.swift */,
-				C16B919E1E1FAE29001B1FC1 /* zFUNC textToTexture.swift */,
+				C16B919E1E1FAE29001B1FC1 /* FUNC textToTexture.swift */,
 				C1423E4A1E1FA26100B7AFBE /* SETUP.swift */,
 				C142770D1E1E772B00B72B92 /* UTILITY.swift */,
 				C1FEE67C1E1D4E2D00642A5A /* Procedural files 1 */,
@@ -199,7 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C16B919F1E1FAE29001B1FC1 /* zFUNC textToTexture.swift in Sources */,
+				C16B919F1E1FAE29001B1FC1 /* FUNC textToTexture.swift in Sources */,
 				C158A4221E1CEAF300B7DE50 /* GameScene.swift in Sources */,
 				C142770E1E1E772B00B72B92 /* UTILITY.swift in Sources */,
 				C1FEE6791E1D4DD700642A5A /* Prompt.swift in Sources */,
