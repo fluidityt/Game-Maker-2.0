@@ -17,6 +17,7 @@ enum ux: p_NeedsStaticInitialization {
           // currentSelection: Something?
              highlightNode: SKShapeNode?,
              toolbar:       Toolbar?,
+              prompts:      [Prompt]?,
              isInitialized: Bool = false
   
   static func unselect() {
@@ -46,6 +47,7 @@ enum ux: p_NeedsStaticInitialization {
 
     let prompt = Prompt(color: .white, size: CGSize(width: 300, height: 300))
     prompt.initialize(name: "Default Prompt")
+    
     scene.addChild(prompt)
     currentPrompt = prompt
 
@@ -58,7 +60,7 @@ enum ux: p_NeedsStaticInitialization {
 
     // FIXME: Make more isInitialized types
     toolbar = Toolbar(color: .green, size: CGSize(width: 145, height: 500))
-    toolbar!.initialize(scene: scene)    
+    toolbar!.initialize(scene: scene)
   }
   
 }
