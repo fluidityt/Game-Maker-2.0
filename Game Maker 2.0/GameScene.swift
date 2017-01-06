@@ -8,9 +8,6 @@
 
 import SpriteKit
 
-var gView: SKView?
-var gScene: GameScene?
-
 class GameScene: SKScene {
   
   override func didMove(to view: SKView) {
@@ -21,7 +18,7 @@ class GameScene: SKScene {
     ux.initialize(scene: self)
   }
   
-  func touch
+
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
       ux.unselect()
   }

@@ -16,7 +16,6 @@ fileprivate func failedErrorCheck(_ riskyPrompt: Prompt? = ux.currentPrompt) -> 
   else                                { print("fec: good 2 go"); return false }
 }
 
-
 // NOTE: Subclasses' respective same-named function will run on overriden touchesBegan().
 enum ToolbarButtons {
   

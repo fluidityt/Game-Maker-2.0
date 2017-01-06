@@ -6,26 +6,13 @@
 
 import SpriteKit
 
-// FIXME: Add a text support init for SKSpriteNode
-protocol p_NeedsInitialization {
-  var isInitialized: Bool { get set }
-}
-
 // Because we need a global state namespace:
-enum ux {
-  
-  enum State {
-    case detail,    // Brings up detail screen.
-         overview,  // Drag n drop, etc.
-         multi,     // Multiple-select.
-         advance    // Cinema-style.
-  }
-
+enum ux: p_NeedsStaticInitialization {
   
   static var currentPrompt: Prompt?,
              currentScene:  GameScene?,
              currentChoice: Choice?,
-             currentState:  State?,
+             currentState:  UXState?,
   
           // currentSelection: Something?
              highlightNode: SKShapeNode?,

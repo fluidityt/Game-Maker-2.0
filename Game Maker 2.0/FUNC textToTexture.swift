@@ -19,10 +19,10 @@ func textToTexture(text: String,
   tempLabel.verticalAlignmentMode = .center
   
   if bordered {
-    let tempBox   = SKShapeNode(rectOf: tempLabel.frame.size)
+    let tempBox = SKShapeNode(rectOf: tempLabel.frame.size)
     tempBox.strokeColor = borderColor
   
-    tempLabel.setScale(0.9) // To make it fit.
+    tempLabel.setScale(0.9) // To make it fit inside borcer.
     
     tempBox.addChild(tempLabel)
     returnNode.addChild(tempBox)
