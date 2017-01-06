@@ -28,7 +28,7 @@ enum ux: p_NeedsStaticInitialization {
   static func highlight(_ node: SKSpriteNode) {
     
     print("hiliting b4 guard")
-    guard isInitialized else { print("ux: not init"); return }
+    guard isInitialized else { print("hilite: ux not init"); return }
     
     if highlightNode!.parent != nil { highlightNode!.removeFromParent() }
     highlightNode = SKShapeNode(rectOf: node.frame.size)
