@@ -57,9 +57,8 @@ enum ux: p_NeedsStaticInitialization {
     highlight(prompt)
 
     // FIXME: Make more isInitialized types
-    let toolbar = Toolbar(color: .green, size: CGSize(width: 145, height: 500))
-    toolbar.initialize(scene: scene)
-    
+    toolbar = Toolbar(color: .green, size: CGSize(width: 145, height: 500))
+    toolbar!.initialize(scene: scene)    
   }
   
 }

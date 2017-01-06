@@ -16,6 +16,8 @@ class GameScene: SKScene {
     view.layer.cornerRadius = view.frame.size.width/2
     anchorPoint = CGPoint(x: 0.5, y: 0.5)
     ux.initialize(scene: self)
+    
+    drawLine(from: ux.toolbar!.frame.topLeft, to: ux.currentPrompt!.frame.bottomRight)
   }
   
 
