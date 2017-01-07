@@ -33,18 +33,8 @@ func addChoice(to parent: SKSpriteNode) {
   func spaceOut() {}        // Moves everything over to the right.
   
 }
-
-let sceneView = SKView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 400, height: 450)))
-let scene     = SKScene(size: CGSize(width: 400, height: 450))
-LOADSCENE: do {
-  scene.backgroundColor = .white
-  scene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-  sceneView.presentScene(scene)
-  PlaygroundPage.current.liveView = sceneView
-}
-
-
 func spaceOutChildren(children: [SKSpriteNode]) {
+  
   if isEven(children.count) {
     let amountTotal = CGFloat(25 * children.count)
     let amountPer   = CGFloat(amountTotal / CGFloat(children.count))
@@ -55,17 +45,41 @@ func spaceOutChildren(children: [SKSpriteNode]) {
       child.position.x = (child.parent!.position.x + CGFloat(25/2)) - amountStart
       child.position.x += amountPer * counter
       counter += 1
-      //      guard child != children[0] else { child.position.x -= (25/2); continue }
-  
+      if child == children[0] {}
+      else {
+        child.position.x -= 5
+        child.position.x += CGFloat(5 * counter)
+      }
+
+      // FIXME: hotfix.... maybe convert everything to a position array? so only one operation and search
+      // FIXME: 6 chilren needs more
+      if child == children.last && children.count > 2 {
+        for child2 in children {
+            child2.position.x -= 5
+          }
+      }
     }
   } else {
   }
 }
+func getSuperParent(from node: SKSpriteNode) -> SKSpriteNode? {
+  if let superParent = node.parent?.parent as? SKSpriteNode { return superParent }
+  else { print("parent not found"); return nil }
+}
 
+let sceneView = SKView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 400, height: 450)))
+let scene     = SKScene(size: CGSize(width: 400, height: 450))
+LOADSCENE: do {
+  scene.backgroundColor = .white
+  scene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+  sceneView.presentScene(scene)
+  PlaygroundPage.current.liveView = sceneView
+}
 
 let prompt1 = buildPrompt()
 LOADPROMPT1: do {
   scene.addChild(prompt1); prompt1.position.y += 225
+  prompt1.name = "First"
   
   prompt1.addChild(buildChoice())
   prompt1.addChild(buildChoice())
@@ -77,9 +91,39 @@ LOADPROMPT1: do {
   prompt1.children[3].addChild(buildPrompt())
   
   prompt1.children[0].children[0].addChild(buildChoice())
+  
+  
+  prompt1.children[3].children[0].addChild(buildChoice())
+  prompt1.children[3].children[0].addChild(buildChoice())
   prompt1.children[3].children[0].addChild(buildChoice())
   prompt1.children[3].children[0].addChild(buildChoice())
   spaceOutChildren(children: prompt1.children[3].children[0].children as! [SKSpriteNode])
   
-  let brPrompt = prompt1.children[3].children[0]
+  let brPrompt = prompt1.children[3].children[0] as! SKSpriteNode
+  
 }
+
+enum SearchDirection { case left, right, both, none }
+func determineDirection(from node: SKSpriteNode) -> SearchDirection {
+  typealias SD = SearchDirection
+  
+  guard let parent = node.parent else { print("dd: no parent"); return SearchDirection.none }
+  
+  guard let superParent = getSuperParent(from: node) else { print("dd: no sParent"); return SD.none }
+  
+  let superChildren = superParent.children
+  
+  var index = 0, parentIndex = -1
+  for superChild in superChildren {
+  
+    if superChild == parent {  // Found index; determine direction:
+      if index == 0 {
+        if superChild == superChildren.last { return SD.none } else { return SD.right }
+      } else if superChild == superChildren.last { return SD.left }
+      else { return .both }
+    }
+    index += 1
+  }
+  fatalError("somehow this failed")
+}
+
