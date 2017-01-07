@@ -6,9 +6,6 @@
 
 import SpriteKit
 
-
-// MARK: - TOOLBARBUTTON.SWIFT
-
 // FIXME: Where does this belong?
 fileprivate func failedErrorCheck(_ riskyPrompt: Prompt? = ux.currentPrompt) -> Bool {
   guard let prompt = riskyPrompt else { print("fec: found nil"); return true  }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C1012BCE1E1D766000157D6A /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1012BCD1E1D766000157D6A /* Keyboard.swift */; };
 		C1012BD01E1D7A2B00157D6A /* TODO.rtf in Resources */ = {isa = PBXBuildFile; fileRef = C1012BCF1E1D7A2B00157D6A /* TODO.rtf */; };
+		C140757B1E20E2A100CA84BC /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C140757A1E20E2A100CA84BC /* Grid.swift */; };
 		C1423E471E1F8AFD00B7AFBE /* DESIGN.sks in Resources */ = {isa = PBXBuildFile; fileRef = C1423E461E1F8AFD00B7AFBE /* DESIGN.sks */; };
 		C1423E491E1FA0F300B7AFBE /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1423E481E1FA0F300B7AFBE /* Choice.swift */; };
 		C1423E4B1E1FA26100B7AFBE /* SETUP.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1423E4A1E1FA26100B7AFBE /* SETUP.swift */; };
@@ -31,6 +32,8 @@
 /* Begin PBXFileReference section */
 		C1012BCD1E1D766000157D6A /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		C1012BCF1E1D7A2B00157D6A /* TODO.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = TODO.rtf; path = "Game Maker 2.0/TODO.rtf"; sourceTree = "<group>"; };
+		C140757A1E20E2A100CA84BC /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		C140757C1E20E31600CA84BC /* GM2pg.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = GM2pg.playground; path = "Game Maker 2.0/GM2pg.playground"; sourceTree = "<group>"; };
 		C1423E461E1F8AFD00B7AFBE /* DESIGN.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = DESIGN.sks; path = "Game Maker 2.0/DESIGN.sks"; sourceTree = "<group>"; };
 		C1423E481E1FA0F300B7AFBE /* Choice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
 		C1423E4A1E1FA26100B7AFBE /* SETUP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SETUP.swift; sourceTree = "<group>"; };
@@ -68,6 +71,7 @@
 			children = (
 				C1012BCF1E1D7A2B00157D6A /* TODO.rtf */,
 				C1423E461E1F8AFD00B7AFBE /* DESIGN.sks */,
+				C140757C1E20E31600CA84BC /* GM2pg.playground */,
 				C158A41A1E1CEAF300B7DE50 /* Game Maker 2.0 */,
 				C158A4191E1CEAF300B7DE50 /* Products */,
 				C158A4331E1CEC2A00B7DE50 /* junk */,
@@ -87,6 +91,7 @@
 			children = (
 				C158A4211E1CEAF300B7DE50 /* GameScene.swift */,
 				C1012BCD1E1D766000157D6A /* Keyboard.swift */,
+				C140757A1E20E2A100CA84BC /* Grid.swift */,
 				C16B919C1E1FADDE001B1FC1 /* FUNC testLine.swift */,
 				C16B919E1E1FAE29001B1FC1 /* FUNC textToTexture.swift */,
 				C1423E4A1E1FA26100B7AFBE /* SETUP.swift */,
@@ -204,6 +209,7 @@
 				C142770E1E1E772B00B72B92 /* UTILITY.swift in Sources */,
 				C1FEE6791E1D4DD700642A5A /* Prompt.swift in Sources */,
 				C1FEE67B1E1D4E1100642A5A /* enum ux.swift in Sources */,
+				C140757B1E20E2A100CA84BC /* Grid.swift in Sources */,
 				C1012BCE1E1D766000157D6A /* Keyboard.swift in Sources */,
 				C158A4241E1CEAF300B7DE50 /* GameViewController.swift in Sources */,
 				C158A4371E1CEE6600B7DE50 /* Toolbar.swift in Sources */,
