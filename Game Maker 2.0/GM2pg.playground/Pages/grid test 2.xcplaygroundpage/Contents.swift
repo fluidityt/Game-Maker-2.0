@@ -33,25 +33,6 @@ func addChoice(to parent: SKSpriteNode) {
   func spaceOut() {}        // Moves everything over to the right.
   
 }
-func spaceOutChildren(children: [SKSpriteNode]) {
-  let finalWidth: CGFloat = {
-    let  cWidth = CGFloat (25),
-         buffer = CGFloat (10),
-         count  = CGFloat (children.count),
-    
-         fWidth = buffer * (count - 1)
-    return fWidth * (cWidth * count)
-  }()
-
-  if isEven(children.count) {
-    
-  } else {
-    
-  }
-  
-  
-  
-}
 
 let sceneView = SKView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 400, height: 450)))
 let scene     = SKScene(size: CGSize(width: 400, height: 450))
@@ -62,9 +43,43 @@ LOADSCENE: do {
   PlaygroundPage.current.liveView = sceneView
 }
 
+
+func spaceOutChildren(children: [SKSpriteNode]) {
+  if isEven(children.count) {
+    let amountTotal = CGFloat(25 * children.count)
+    let amountPer   = CGFloat(amountTotal / CGFloat(children.count))
+    let amountStart = CGFloat(amountTotal / 2)
+    
+    var counter = CGFloat(0)
+    for child in children {
+      child.position.x = (child.parent!.position.x + CGFloat(25/2)) - amountStart
+      child.position.x += amountPer * counter
+      counter += 1
+      //      guard child != children[0] else { child.position.x -= (25/2); continue }
+  
+    }
+  } else {
+  }
+}
+
+
 let prompt1 = buildPrompt()
 LOADPROMPT1: do {
   scene.addChild(prompt1); prompt1.position.y += 225
+  
   prompt1.addChild(buildChoice())
   prompt1.addChild(buildChoice())
+  prompt1.addChild(buildChoice())
+  prompt1.addChild(buildChoice())
+  spaceOutChildren(children: prompt1.children as! [SKSpriteNode])
+  
+  prompt1.children[0].addChild(buildPrompt())
+  prompt1.children[3].addChild(buildPrompt())
+  
+  prompt1.children[0].children[0].addChild(buildChoice())
+  prompt1.children[3].children[0].addChild(buildChoice())
+  prompt1.children[3].children[0].addChild(buildChoice())
+  spaceOutChildren(children: prompt1.children[3].children[0].children as! [SKSpriteNode])
+  
+  let brPrompt = prompt1.children[3].children[0]
 }
