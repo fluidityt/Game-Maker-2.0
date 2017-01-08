@@ -33,6 +33,7 @@ func addChoice(to parent: SKSpriteNode) {
   func spaceOut() {}        // Moves everything over to the right.
   
 }
+
 func spaceOutChildren(children: [SKSpriteNode]) {
   
   if isEven(children.count) {
@@ -50,9 +51,7 @@ func spaceOutChildren(children: [SKSpriteNode]) {
         child.position.x -= 5
         child.position.x += CGFloat(5 * counter)
       }
-
-      // FIXME: hotfix.... maybe convert everything to a position array? so only one operation and search
-      // FIXME: 6 chilren needs more
+  
       if child == children.last && children.count > 2 {
         for child2 in children {
             child2.position.x -= 5
@@ -60,6 +59,9 @@ func spaceOutChildren(children: [SKSpriteNode]) {
       }
     }
   } else {
+  }
+  if let scene = children.first?.scene {
+    //children[0].parent!.userData?.addEntries(from: <#T##[AnyHashable : Any]#>) = scene.convertPoint(toView: children[0].frame.minX)
   }
 }
 func getSuperParent(from node: SKSpriteNode) -> SKSpriteNode? {
@@ -103,6 +105,7 @@ LOADPROMPT1: do {
   
 }
 
+
 enum SearchDirection { case left, right, both, none }
 func determineDirection(from node: SKSpriteNode) -> SearchDirection {
   typealias SD = SearchDirection
@@ -127,3 +130,5 @@ func determineDirection(from node: SKSpriteNode) -> SearchDirection {
   fatalError("somehow this failed")
 }
 
+//func doSearch(from node: SKSpriteNode) -> (needsLeft: Bool, needsRight: Bool) {
+//}
