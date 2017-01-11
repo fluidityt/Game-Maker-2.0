@@ -13,20 +13,26 @@ extension CGRect {
   var topRight:    CGPoint { return CGPoint(x: maxX, y: maxX) }
 }
 
-func doIt() {
-func getMiddleNumber(number: Int) -> Int { return ((number - 1) / 2) + 1 }
-func isEven(_ amount: Int) -> Bool { if amount % 2 == 0 { return true } else { return false }}
-func buildPrompt() -> SKSpriteNode {
+enum util {
+
+  static func getMiddleNumber(number: Int) -> Int { return ((number - 1) / 2) + 1 }
+
+  static func isEven(_ amount: Int) -> Bool { if amount % 2 == 0 { return true } else { return false }}
+
+  static func buildPrompt() -> SKSpriteNode {
+
   let ret = SKSpriteNode(color: .yellow, size: CGSize(width: 25, height: 25))
   ret.position.y -= 35
   return ret
 }
-func buildChoice() -> SKSpriteNode {
+
+  static func buildChoice() -> SKSpriteNode {
   let ret = SKSpriteNode(color: .green, size: CGSize(width: 25, height: 25))
   ret.position.y -= 35
   return ret
 }
-func addChoice(to parent: SKSpriteNode) {
+
+  static func addChoice(to parent: SKSpriteNode) {
   let new = buildChoice()
   parent.addChild(new)
   new.position.y -= 35
@@ -46,7 +52,7 @@ func addChoice(to parent: SKSpriteNode) {
   
 }
 
-func spaceOutChildren(children: [SKSpriteNode]) {
+static func spaceOutChildren(children: [SKSpriteNode]) {
   
   if isEven(children.count) {
     let amountTotal = CGFloat(25 * children.count)
@@ -76,9 +82,11 @@ func spaceOutChildren(children: [SKSpriteNode]) {
     //children[0].parent!.userData?.addEntries(from: <#T##[AnyHashable : Any]#>) = scene.convertPoint(toView: children[0].frame.minX)
   }
 }
-func getSuperParent(from node: SKSpriteNode) -> SKSpriteNode? {
+
+  static func getSuperParent(from node: SKSpriteNode) -> SKSpriteNode? {
   if let superParent = node.parent?.parent as? SKSpriteNode { return superParent }
   else { print("parent not found"); return nil }
+}
 }
 
 let sceneView = SKView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 400, height: 450)))
@@ -92,69 +100,82 @@ LOADSCENE: do {
   PlaygroundPage.current.liveView = sceneView
 }
 
-let prompt1 = buildPrompt()
+let prompt1 = util.buildPrompt()
 LOADPROMPT1: do {
   scene.addChild(prompt1); prompt1.position.y += 225
   prompt1.name = "First"
   
   var countar = 0; while countar != 4 {
     countar += 1
-    prompt1.addChild(buildChoice())
+    prompt1.addChild(util.buildChoice())
   }
-  spaceOutChildren(children: prompt1.children as! [SKSpriteNode])
+  util.spaceOutChildren(children: prompt1.children as! [SKSpriteNode])
   
-  prompt1.children[0].addChild(buildPrompt())
+  prompt1.children[0].addChild(util.buildPrompt())
   
-  prompt1.children[3].addChild(buildPrompt())
+  prompt1.children[3].addChild(util.buildPrompt())
   
-  prompt1.children[0].children[0].addChild(buildChoice())
+  prompt1.children[0].children[0].addChild(util.buildChoice())
 
-/**
-working here::
-**/
   
-  let brPrompt = prompt1.children[3].children[0] as! SKSpriteNode
-
-  var counter = 0; while counter != 8 {  // Because I fail at simple for loops.
-    brPrompt.addChild(buildChoice())
-    counter += 1
-  }
-  spaceOutChildren(children: brPrompt.children as! [SKSpriteNode])
-  
-  let children: [SKSpriteNode] = brPrompt.children as! [SKSpriteNode]
-  for child in children {
-    child.color = .blue
+  ADDCHOICES: do {
     
-    // calculate distance before
-    // draw line
-    // update arrays
-    // move hundreds of nodes
-  
-  }
-  
-  // Make sure no collisions:
-  
-  checkCollisions: do {
-    let farLeft = scene.convertPoint(toView: brPrompt.frame.centerLeft)
+    // Our bottom right prompt:
+    let brPrompt = prompt1.children[3].children[0] as! SKSpriteNode
     
-    // determine if children exist:
-    guard let sp = getSuperParent(from: brPrompt) else { fatalError() }
+    // Add and recolor children:
+    var counter = 0; while counter != 8 { counter += 1 // Because I fail at simple for loops.
+      brPrompt.addChild(util.buildChoice())
+    }
+    util.spaceOutChildren(children: brPrompt.children as! [SKSpriteNode])
     
-    var childrenWithChildren = [SKSpriteNode]()
+    let children: [SKSpriteNode] = brPrompt.children as! [SKSpriteNode]
+    for child in children { child.color = .blue }
     
-    // find highest element in array
-    for child2 in (sp.children as! [SKSpriteNode]) {
-      if child2.children.count > 0 { childrenWithChildren.append(child2) }
+    
+    // Make sure no collisions:
+    checkCollisions: do {
+      
+      guard let sp = getSuperParent(from: brPrompt) else { fatalError("no super parent") }
+      
+      // Our newest choices farthest left position:
+      let farLeft = scene.convertPoint(toView: brPrompt.frame.centerLeft)
+      
+      // find highest element in array
+      var foundPrompt: SKSpriteNode?
+      var countor = (sp.children.count - 1)
+      
+      while countor > 0 { countor -= 1
+        let child23 = sp.children[countor]
+        // We found it:
+        if child23.children.count > 0 {
+          foundPrompt = sp.children[countor].children.last as? SKSpriteNode
+          break
+        }
+      }
+      
+      // Ensure we have a match:
+      guard let prompt = foundPrompt else {
+        print("no highest element found")
+        break checkCollisions
+      }
+      
+      // Determine if we are encroaching:
+      guard prompt.children.count > 0 else { fatalError("no children") }
+      let farRight = scene.convertPoint(toView: prompt.children.last!.frame.centerRight)
+      
+      if farRight.x > farLeft.x {
+        // Move whole unit over:
+        prompt.parent!.position.x -= abs(farRight.x - farLeft.x)
+      }
+      
+      // Realign children from super parent:
+      
+      
     }
     
-    for child3 in childrenWithChildren {
-      let
-      if child3.children.last!.frame.centerRight
-    }
   }
-  
 }
-}
-doIt()
+
 
 
