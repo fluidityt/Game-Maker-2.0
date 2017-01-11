@@ -74,7 +74,9 @@ let scene     = SKScene(size: CGSize(width: 400, height: 450))
 LOADSCENE: do {
   scene.backgroundColor = .white
   scene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+  scene.physicsWorld.gravity = CGVector.zero
   sceneView.presentScene(scene)
+  
   PlaygroundPage.current.liveView = sceneView
 }
 
@@ -83,25 +85,47 @@ LOADPROMPT1: do {
   scene.addChild(prompt1); prompt1.position.y += 225
   prompt1.name = "First"
   
-  prompt1.addChild(buildChoice())
-  prompt1.addChild(buildChoice())
-  prompt1.addChild(buildChoice())
-  prompt1.addChild(buildChoice())
+  var countar = 0; while countar != 4 {
+    countar += 1
+    prompt1.addChild(buildChoice())
+  }
   spaceOutChildren(children: prompt1.children as! [SKSpriteNode])
   
   prompt1.children[0].addChild(buildPrompt())
+  
   prompt1.children[3].addChild(buildPrompt())
   
   prompt1.children[0].children[0].addChild(buildChoice())
-  
-  
-  prompt1.children[3].children[0].addChild(buildChoice())
-  prompt1.children[3].children[0].addChild(buildChoice())
-  prompt1.children[3].children[0].addChild(buildChoice())
-  prompt1.children[3].children[0].addChild(buildChoice())
-  spaceOutChildren(children: prompt1.children[3].children[0].children as! [SKSpriteNode])
-  
+
+/**
+working here::
+   
+   
+   
+   func parseFrame(fromNode node: SKNode, inScene scene: SKScene) -> [SKNode] {
+   
+     return true
+   }
+**/
   let brPrompt = prompt1.children[3].children[0] as! SKSpriteNode
+  // check hits:
+
+  var counter = 0; while counter != 8 {  // Because I fail at simple for loops.
+    brPrompt.addChild(buildChoice())
+    counter += 1
+  }
+  spaceOutChildren(children: brPrompt.children as! [SKSpriteNode])
+  
+  let children: [SKSpriteNode] = brPrompt.children as! [SKSpriteNode]
+  for child in children {
+    child.color = .blue
+    
+    // calculate distance before
+    // draw line
+    // update arrays
+    // move hundreds of nodes
+    
+  }
   
 }
 
