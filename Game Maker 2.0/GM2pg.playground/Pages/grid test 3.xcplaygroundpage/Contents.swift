@@ -120,7 +120,7 @@ LOADPROMPT1: do {
   
   ADDCHOICES: do {
     
-    // Our bottom right prompt:
+    // Our bottom right prompt:d
     let brPrompt = prompt1.children[3].children[0] as! SKSpriteNode
     
     // Add and recolor children:
