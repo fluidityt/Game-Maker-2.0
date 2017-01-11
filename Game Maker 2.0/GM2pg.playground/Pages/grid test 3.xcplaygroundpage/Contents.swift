@@ -1,7 +1,19 @@
 //: [Previous](@previous)
+
 import SpriteKit
 import PlaygroundSupport
+extension CGRect {
+  var center:      CGPoint { return CGPoint(x: midX, y: midY) }
+  var centerLeft:  CGPoint { return CGPoint(x: minX, y: midY) }
+  var centerRight: CGPoint { return CGPoint(x: maxX, y: midY) }
+  
+  var bottomLeft:  CGPoint { return CGPoint(x: minX, y: minY) }
+  var bottomRight: CGPoint { return CGPoint(x: maxX, y: minY) }
+  var topLeft:     CGPoint { return CGPoint(x: minX, y: maxY) }
+  var topRight:    CGPoint { return CGPoint(x: maxX, y: maxX) }
+}
 
+func doIt() {
 func getMiddleNumber(number: Int) -> Int { return ((number - 1) / 2) + 1 }
 func isEven(_ amount: Int) -> Bool { if amount % 2 == 0 { return true } else { return false }}
 func buildPrompt() -> SKSpriteNode {
@@ -102,7 +114,6 @@ working here::
 **/
   
   let brPrompt = prompt1.children[3].children[0] as! SKSpriteNode
-  // check hits:
 
   var counter = 0; while counter != 8 {  // Because I fail at simple for loops.
     brPrompt.addChild(buildChoice())
@@ -118,35 +129,32 @@ working here::
     // draw line
     // update arrays
     // move hundreds of nodes
+  
+  }
+  
+  // Make sure no collisions:
+  
+  checkCollisions: do {
+    let farLeft = scene.convertPoint(toView: brPrompt.frame.centerLeft)
     
-  }
-  
-}
-
-enum SearchDirection { case left, right, both, none }
-func determineDirection(from node: SKSpriteNode) -> SearchDirection {
-  typealias SD = SearchDirection
-  
-  guard let parent = node.parent else { print("dd: no parent"); return SearchDirection.none }
-  
-  guard let superParent = getSuperParent(from: node) else { print("dd: no sParent"); return SD.none }
-  
-  let superChildren = superParent.children
-  
-  var index = 0, parentIndex = -1
-  for superChild in superChildren {
-  
-    if superChild == parent {  // Found index; determine direction:
-      if index == 0 {
-        if superChild == superChildren.last { return SD.none } else { return SD.right }
-      } else if superChild == superChildren.last { return SD.left }
-      else { return .both }
+    // determine if children exist:
+    guard let sp = getSuperParent(from: brPrompt) else { fatalError() }
+    
+    var childrenWithChildren = [SKSpriteNode]()
+    
+    // find highest element in array
+    for child2 in (sp.children as! [SKSpriteNode]) {
+      if child2.children.count > 0 { childrenWithChildren.append(child2) }
     }
-    index += 1
+    
+    for child3 in childrenWithChildren {
+      let
+      if child3.children.last!.frame.centerRight
+    }
   }
-  fatalError("somehow this failed")
+  
 }
+}
+doIt()
 
-//func doSearch(from node: SKSpriteNode) -> (needsLeft: Bool, needsRight: Bool) {
-//}
 

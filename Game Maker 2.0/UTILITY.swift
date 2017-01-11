@@ -15,6 +15,9 @@ import  SpriteKit
 
 extension CGRect {
   var center:      CGPoint { return CGPoint(x: midX, y: midY) }
+  var centerLeft:  CGPoint { return CGPoint(x: minX, y: midY) }
+  var centerRight: CGPoint { return CGPoint(x: maxX, y: midY) }
+  
   var bottomLeft:  CGPoint { return CGPoint(x: minX, y: minY) }
   var bottomRight: CGPoint { return CGPoint(x: maxX, y: minY) }
   var topLeft:     CGPoint { return CGPoint(x: minX, y: maxY) }

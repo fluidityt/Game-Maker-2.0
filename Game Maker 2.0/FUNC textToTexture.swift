@@ -20,7 +20,6 @@ func textToTexture(text: String,
   if bordered {
     let tempBox = SKShapeNode(rectOf: tempLabel.frame.size)
     tempBox.strokeColor = borderColor
-  
     tempLabel.setScale(0.9) // To make it fit inside borcer.
     
     tempBox.addChild(tempLabel)
