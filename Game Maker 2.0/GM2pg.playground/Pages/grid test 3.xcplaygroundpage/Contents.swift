@@ -124,7 +124,7 @@ LOADPROMPT1: do {
     brPrompt.name = "BottomRight"
     
     // Add and recolor children:
-    var counter = 0; while counter != 8 { counter += 1 // Because I fail at simple for loops.
+    var counter = 0; while counter != 8 { counter += 1 // Because I fail at simple for loops.d
       brPrompt.addChild(Util.buildChoice())
     }
     Util.spaceOutChildren(children: brPrompt.children as! [SKSpriteNode])
@@ -177,4 +177,4 @@ LOADPROMPT1: do {
 }
 
 
-    
+
