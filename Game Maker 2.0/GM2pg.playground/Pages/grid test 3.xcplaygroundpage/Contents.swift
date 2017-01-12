@@ -138,7 +138,8 @@ LOADPROMPT1: do {
       guard let sp = Util.getSuperParent(from: brPrompt) else { fatalError("no super parent") }
       
       // Our newest choices farthest left position:
-      let farLeft = scene.convertPoint(toView: brPrompt.frame.centerLeft)
+      let newBoxLeft = scene.convertPoint(toView: brPrompt.children.first!.frame.centerLeft)
+      (brPrompt.children.first! as! SKSpriteNode).color = .black
       
       // find highest element in array
       var foundPrompt: SKSpriteNode?
@@ -163,10 +164,21 @@ LOADPROMPT1: do {
       guard prompt.children.count > 0 else { fatalError("no children") }
       let farRight = scene.convertPoint(toView: prompt.children.last!.frame.centerRight)
       
-      if farRight.x > farLeft.x {
+      /// fixme
+      if farRight.x > newBoxLeft.x {
         // Move whole unit over:
-        prompt.parent!.position.x -= abs(farRight.x - farLeft.x)
+        print("adjusting...\n")
+        /// prompt.parent!.position.x = newBoxLeft.x
+        (prompt.parent! as! SKSpriteNode).color = .gray
+        prompt.parent?.position.x = brPrompt.children.first!.position.x
+        
+        //prompt.parent!.position.x -= 35
       }
+      
+      /// WTFFFFF???
+      print(prompt.parent?.position.x )
+      print(brPrompt.children.first!.position.x)
+      //print("fr",farRight.x, "nbl",newBoxLeft.x)
       
       // Realign children from super parent:
       

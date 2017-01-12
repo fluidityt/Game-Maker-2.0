@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-// GLOBALS:
+// GLOBALS: 
 enum g {
   static var view: SKView?,
              scene: GameScene?
