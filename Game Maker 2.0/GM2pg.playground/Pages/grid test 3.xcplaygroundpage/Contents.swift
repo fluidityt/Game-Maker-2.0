@@ -13,7 +13,7 @@ extension CGRect {
   var topRight:    CGPoint { return CGPoint(x: maxX, y: maxX) }
 }
 
-enum util {
+enum Util {
   
   static func buildPrompt() -> SKSpriteNode {
     
@@ -100,21 +100,21 @@ LOADSCENE: do {
   PlaygroundPage.current.liveView = sceneView
 }
 
-let prompt1 = util.buildPrompt()
+let prompt1 = Util.buildPrompt()
 LOADPROMPT1: do {
   scene.addChild(prompt1); prompt1.position.y += 225
   prompt1.name = "First"
   
   var countar = 0; while countar != 4 { countar += 1
-    prompt1.addChild(util.buildChoice())
+    prompt1.addChild(Util.buildChoice())
   }
-  util.spaceOutChildren(children: prompt1.children as! [SKSpriteNode])
+  Util.spaceOutChildren(children: prompt1.children as! [SKSpriteNode])
   
-  prompt1.children[0].addChild(util.buildPrompt())
+  prompt1.children[0].addChild(Util.buildPrompt())
   
-  prompt1.children[3].addChild(util.buildPrompt())
+  prompt1.children[3].addChild(Util.buildPrompt())
   
-  prompt1.children[0].children[0].addChild(util.buildChoice())
+  prompt1.children[0].children[0].addChild(Util.buildChoice())
 
   
   ADDCHOICES: do {
@@ -125,9 +125,9 @@ LOADPROMPT1: do {
     
     // Add and recolor children:
     var counter = 0; while counter != 8 { counter += 1 // Because I fail at simple for loops.
-      brPrompt.addChild(util.buildChoice())
+      brPrompt.addChild(Util.buildChoice())
     }
-    util.spaceOutChildren(children: brPrompt.children as! [SKSpriteNode])
+    Util.spaceOutChildren(children: brPrompt.children as! [SKSpriteNode])
     
     let children: [SKSpriteNode] = brPrompt.children as! [SKSpriteNode]
     for child in children { child.color = .blue }
@@ -135,7 +135,7 @@ LOADPROMPT1: do {
 
     checkCollisions: do {
       
-      guard let sp = util.getSuperParent(from: brPrompt) else { fatalError("no super parent") }
+      guard let sp = Util.getSuperParent(from: brPrompt) else { fatalError("no super parent") }
       
       // Our newest choices farthest left position:
       let farLeft = scene.convertPoint(toView: brPrompt.frame.centerLeft)
@@ -177,4 +177,4 @@ LOADPROMPT1: do {
 }
 
 
-
+    
