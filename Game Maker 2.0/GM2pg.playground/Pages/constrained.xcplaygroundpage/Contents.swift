@@ -3,6 +3,9 @@ import PlaygroundSupport
 
 PlaygroundPage.current.liveView = Util.loadScene()
 
+final class Grid {
+  
+}
 
 /// Member:
 final class Holder: SKShapeNode {
@@ -100,17 +103,17 @@ do { START: do {
       holder1x1.xScale = 0.5
       scene.addChild(holder1x1)
     }
-    let holder2x1  = Holder.newHolder(color: .green); do {
+    let holder2x1  = Holder.newHolder(color: .green ); do {
       holder2x1.name = "2x1"
       holder2x1.position.y = (scene.frame.maxY - 90)
       holder2x1.position.x = scene.frame.midX - 70
       scene.addChild(holder2x1)
     }
-    let holder4x1  = Holder.newHolder(color: .green); do {
+    let holder4x1  = Holder.newHolder(color: .green ); do {
     holder4x1.position.x -= 190
     holder4x1.position.y += 20
     scene.addChild(holder4x1)}
-    let holder4x2 = Holder.newHolder(color: .green); do {
+    let holder4x2  = Holder.newHolder(color: .green ); do {
       holder4x2.position.x += 35
       holder4x2.position.y += 20
       scene.addChild(holder4x2)}
@@ -119,7 +122,6 @@ do { START: do {
     for node in nodes { print(node.name, "\n") }
     
     // On adding new node, extend holder, then check if holder overlaps anything.
-    
     
   }
 }
