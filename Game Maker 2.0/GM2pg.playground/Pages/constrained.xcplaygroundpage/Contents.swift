@@ -69,6 +69,7 @@ do { START: do {
   repel.initialize(scene: scene)
   
   let block = Util.buildPrompt()
+  block.position.y -= 170
   block.constraints = [SKConstraint.distance(SKRange(lowerLimit: 35), to: repel),
                        SKConstraint.positionY(SKRange(constantValue: block.position.y))]
   scene.addChild(block)
@@ -93,15 +94,32 @@ do { START: do {
   
   HOLDER: do {
     let holder1x1  = Holder.newHolder(color: .yellow); do {
+      holder1x1.name = "1x1"
+      holder1x1.position.y = (scene.frame.maxY - 50)
+      holder1x1.position.x = scene.frame.midX - 35
+      holder1x1.xScale = 0.5
       scene.addChild(holder1x1)
     }
     let holder2x1  = Holder.newHolder(color: .green); do {
-    holder2x1.position.x -= 190
-    holder2x1.position.y += 70
-    scene.addChild(holder2x1)}
-    let holder2x2 = Holder.newHolder(color: .greenf); do {
-      holder2x2.position.x += 35
-      holder2x2.position.y += 70
-      scene.addChild(holder2x2)}
+      holder2x1.name = "2x1"
+      holder2x1.position.y = (scene.frame.maxY - 90)
+      holder2x1.position.x = scene.frame.midX - 70
+      scene.addChild(holder2x1)
+    }
+    let holder4x1  = Holder.newHolder(color: .green); do {
+    holder4x1.position.x -= 190
+    holder4x1.position.y += 20
+    scene.addChild(holder4x1)}
+    let holder4x2 = Holder.newHolder(color: .green); do {
+      holder4x2.position.x += 35
+      holder4x2.position.y += 20
+      scene.addChild(holder4x2)}
+    
+    let nodes = scene.nodes(at: CGPoint(x: holder1x1.frame.midX, y: holder1x1.frame.minY))
+    for node in nodes { print(node.name, "\n") }
+    
+    // On adding new node, extend holder, then check if holder overlaps anything.
+    
+    
   }
 }
