@@ -3,10 +3,6 @@ import PlaygroundSupport
 
 PlaygroundPage.current.liveView = Util.loadScene()
 
-final class Grid {
-  
-}
-
 /// Member:
 final class Holder: SKShapeNode {
   

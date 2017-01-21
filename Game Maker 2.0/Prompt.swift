@@ -9,7 +9,6 @@ import SpriteKit
 // The visible node that will export to swift code:
 final class Prompt: SKSpriteNode, p_NeedsInitialization {
   
-  
   // Because we need some sort of global config for this and I'm too lazy presently:
   let config_maxChoices: Int = 2
   
