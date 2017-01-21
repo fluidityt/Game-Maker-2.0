@@ -52,10 +52,11 @@ final class Tester: SKScene {
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     /// algo()
-    // for item in nodes(at: secondChildren[1][0].position) { print(item) }
-    
+    /// take this to SO
     let node = atPoint(touches.first!.location(in: self))
     print(node)
+    print(nodes(at: convert(node.position, to: self)))
+    
   }
 }
 
