@@ -9,15 +9,23 @@ final class Tester: SKScene {
   
       second = [Util.buildPrompt(), Util.buildPrompt()],
       secondChildren = [[Util.buildChoice(),Util.buildChoice()],
-                        [Util.buildChoice()]]
+                        [Util.buildChoice()]],
+  
+      refPoint = SKNode()
   
   override func didMove(to view: SKView) {
+    /// Ref:
+    anchorPoint = CGPoint(x: 0, y: 1)
+    addChild(refPoint)
+    refPoint.position = frame.topLeft
+    
     /// Top:
     addChild(top)
+    top.position = CGPoint(x: frame.midX, y: frame.midY)
     
     /// TopC:
     for child in topChildren { top.addChild(child) }
-    Util.spaceOutChildren(children: (top.children as! [SKSpriteNode]))
+    //Util.spaceOutChildren(children: (top.children as! [SKSpriteNode]))
   
     /// Seconds:
     var counter = -1
@@ -32,7 +40,7 @@ final class Tester: SKScene {
       counter += 1
       for child in secondChildren[counter] { second[counter].addChild(child) }
     }
-    for child in second { Util.spaceOutChildren(children: child.children as! [SKSpriteNode]) }
+    //for child in second { Util.spaceOutChildren(children: child.children as! [SKSpriteNode]) }
   
     
   }
@@ -50,13 +58,36 @@ final class Tester: SKScene {
   
   }
   
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    /// algo()
-    /// take this to SO
-    let node = atPoint(touches.first!.location(in: self))
-    print(node)
-    print(nodes(at: convert(node.position, to: self)))
+  private func zoom(point: CGPoint) {
     
+  }
+  
+  /// algo()
+  /// take this to SO
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    
+    let node = second[0]
+    
+    let touch = touches.first
+    
+    let positionInScene = touch!.location(in: self)
+    print( touch!.location(in: self) )
+    
+    let allNodes = nodes(at: positionInScene)
+    
+    for node in allNodes {
+      
+      let nodePositionConverted = self.convert(node.position, from: node)
+      
+      let nodeFrameConverted
+        = CGRect(origin: CGPoint(x: nodePositionConverted.x - node.frame.maxX,
+                                 y: nodePositionConverted.y - node.frame.maxY),
+                                 size: node.frame.size)
+      
+      if nodeFrameConverted.contains(positionInScene), let n = node.name {
+        print(n)
+      }
+    }
   }
 }
 
