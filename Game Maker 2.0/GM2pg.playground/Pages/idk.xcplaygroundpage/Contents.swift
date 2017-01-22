@@ -31,7 +31,8 @@ final class Tester: SKScene {
     return returner
   }
   
-  private func isOverlapping(noded: SKNode, bkg: SKNode) -> Bool {
+  /// Refac to "overlappedNode"
+  private func isOverlapping(noded: SKNode, bkg: SKNode) -> (result: Bool, node: SKNode?) {
     
     guard let theParent = noded.parent else { fatalError("no parent") }
     
@@ -39,7 +40,7 @@ final class Tester: SKScene {
       var pos1 = convert(noded.frame.centerRight, from: theParent) /// Start at right border.
       pos1.x += 1                                                  /// Check to the right.
       if atPoint(pos1) != noded {
-        if atPoint(pos1) == bkg { break checkRight } else { return true }
+        if atPoint(pos1) == bkg { break checkRight } else { return (true, atPoint(pos1)) }
       }
     }
     
@@ -47,7 +48,7 @@ final class Tester: SKScene {
       var pos2 = convert(noded.frame.centerLeft, from: theParent) /// Continue at left border
       pos2.x -= 1                                                 /// Check to the left.
       if atPoint(pos2) != noded {
-        if atPoint(pos2) == bkg { break checkLeft } else { return true }
+        if atPoint(pos2) == bkg { break checkLeft } else { return (true, atPoint(pos2)) }
       }
     }
     
@@ -55,18 +56,22 @@ final class Tester: SKScene {
       /// FIXME: Add this where if they are exactly on top of each other.. shift out a bit :P
     }
     
-    return false
+    return (false, nil)
   }
   
-  private func algo(startNode: SKNode, superParent: SKNode) {
+  /// Make sure superParent is correct:
+  private func algo(collidedNode: SKNode, superParent: SKNode) {
    
+    print("collided node:", collidedNode.name!)
+    
     var returner = SKNode()
     
     /// Find the next-highest parent:
     func highestParent(ofChildNode: SKNode) -> SKNode {
 
+      
       guard let theParent = ofChildNode.parent else { fatalError("no parent") }
-      print("parent:", theParent.name!)
+      print("-- hp -- parent:", theParent.name!)
       
       if theParent.name! == superParent.name! {
         returner = ofChildNode
@@ -75,7 +80,8 @@ final class Tester: SKScene {
       return returner
     }
     
-    print( "highest parent of \(startNode.name!):", highestParent(ofChildNode: startNode).name! )
+    print( "-- al -- highest parent of \(collidedNode.name!):", highestParent(ofChildNode: collidedNode).name! )
+    
   }
   
   private func overlappingTest() {
@@ -106,9 +112,13 @@ final class Tester: SKScene {
     
     /// Tester:
     
+    let values = isOverlapping(noded: o3sibling, bkg: bkg)
+
+    print("checking collision for o3sibling")
     
-    print( isOverlapping(noded: o3sibling, bkg: bkg) )
-    algo(startNode: o3, superParent: o1)
+    if values.result {
+      algo(collidedNode: values.node!, superParent: n1)
+    }
     
   }
   
