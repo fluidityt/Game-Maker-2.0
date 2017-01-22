@@ -35,6 +35,23 @@ final class Tester: SKScene {
   private func overlappingCheck(noded: SKNode, bkg: SKNode) -> (result: Bool, node: SKNode?) {
     
     guard let theParent = noded.parent else { fatalError("no parent") }
+  
+    checkInside: do {
+      let rangeLeft  = convert(noded.frame.centerLeft,  from: theParent).x
+      let rangeRight = convert(noded.frame.centerRight, from: theParent).x
+      let yVal       = convert(noded.frame.center,      from: theParent).y
+      
+      let resetToThisPosition = noded.zPosition
+      noded.zPosition = -500
+      
+      var ticker = rangeLeft
+      repeat {
+        ticker += 1
+        print(atPoint( CGPoint(x: ticker, y: yVal) ).name)
+      } while (ticker != rangeRight) && (atPoint(CGPoint(x: ticker, y: yVal)) == bkg)
+      
+      noded.zPosition = resetToThisPosition
+    }
     
     checkRight: do {
       var pos1 = convert(noded.frame.centerRight, from: theParent) /// Start at right border.
@@ -61,14 +78,14 @@ final class Tester: SKScene {
   
   /// Make sure superParent is correct:
   private func algo(collidedNode: SKNode, superParent: SKNode) {
-   
+    
     print("collided node:", collidedNode.name!)
     
     var returner = SKNode()
     
     /// Find the next-highest parent:
     func highestParent(ofChildNode: SKNode) -> SKNode {
-
+      
       
       guard let theParent = ofChildNode.parent else { fatalError("no parent") }
       print("-- hp -- parent:", theParent.name!)
@@ -82,10 +99,51 @@ final class Tester: SKScene {
     
     print( "-- al -- highest parent of \(collidedNode.name!):", highestParent(ofChildNode: collidedNode).name! )
     
+    /// oh crap collided nodes that aren"t directly on the border... for loop through entire x
+    /// range after disappear the main one
+    
+  }
+  
+  private func zim() {
+    
   }
   
   private func overlappingTest() {
     
+    /// Background:
+    let bkg = SKSpriteNode(color: .gray, size: self.size)
+    addChild(bkg)
+    bkg.zPosition = -1
+    bkg.name = "bkg"
+    
+    /// Creation: (take note of parents!)
+    let n1 = makeSprite(color: .cyan, name: "n1", theParent: self),
+    n2 = makeSprite(color: .red,  name: "n2", theParent: n1  ),
+    n3 = makeSprite(color: .cyan, name: "n3", theParent: n2  ),
+    
+    o1 = makeSprite(color: .cyan, name: "o1", theParent: self),
+    o2 = makeSprite(color: .red,  name: "o2", theParent: o1  ),
+    o3 = makeSprite(color: .cyan, name: "o3", theParent: o2  ),
+    
+    box = addBox(toNode: self),
+    o3sibling = makeSprite(color: .cyan, name: "o3sibling", theParent: o2)
+    
+    /// Spacing:
+    o1.position.x += 35
+    o3.position.x += 18
+    o3sibling.position.x -= 17
+    
+    /// Tester:
+    print("checking collision for o3sibling")
+    let overlapped = overlappingCheck(noded: o3sibling, bkg: bkg)
+    
+    if overlapped.result == true {
+      algo(collidedNode: overlapped.node!, superParent: n1)
+    }
+    
+  }
+  
+  private func overlappingTest2() {
     
     /// Background:
     let bkg = SKSpriteNode(color: .gray, size: self.size)
@@ -97,35 +155,29 @@ final class Tester: SKScene {
     let n1 = makeSprite(color: .cyan, name: "n1", theParent: self),
         n2 = makeSprite(color: .red,  name: "n2", theParent: n1  ),
         n3 = makeSprite(color: .cyan, name: "n3", theParent: n2  ),
-    
+        
         o1 = makeSprite(color: .cyan, name: "o1", theParent: self),
         o2 = makeSprite(color: .red,  name: "o2", theParent: o1  ),
         o3 = makeSprite(color: .cyan, name: "o3", theParent: o2  ),
-    
-        box = addBox(toNode: self)
-        o3sibling = makeSprite(color: .cyan, name: "o3sibling", theParent: o2),
-    
+        
+        box = addBox(toNode: self),
+        o3sibling = makeSprite(color: .cyan, name: "o3sibling", theParent: o2)
+        
     /// Spacing:
     o1.position.x += 35
     o3.position.x += 18
     o3sibling.position.x -= 17
     
-    /// Tester:
-    let overlapped = overlappingCheck(noded: o3sibling, bkg: bkg)
-    print("checking collision for o3sibling")
-    
-    if overlapped.result == true {
-      algo(collidedNode: overlapped.node!, superParent: n1)
-    }
+    overlappingCheck(noded: o3sibling, bkg: bkg)
     
   }
   
   /**************************************
    ************************************/
- 
- 
+  
+  
   override func didMove(to view: SKView) {
-    overlappingTest()
+    overlappingTest2()
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -145,7 +197,7 @@ final class Tester: SKScene {
           = CGRect(origin: CGPoint(x: nodePositionConverted.x - node.frame.maxX,
                                    y: nodePositionConverted.y - node.frame.maxY),
                    size: node.frame.size)
-     
+        
         /// Filter:
         if nodeFrameConverted.contains(positionInScene), let n = node.name {
           print(n)
