@@ -4,13 +4,6 @@ import PlaygroundSupport
 
 final class Tester: SKScene {
   
-  var top = Util.buildPrompt(),
-      topChildren = [Util.buildChoice(), Util.buildChoice()],
-      
-      second = [Util.buildPrompt(), Util.buildPrompt()],
-      secondChildren = [[Util.buildChoice(),Util.buildChoice()],
-                        [Util.buildChoice()]]
-      
   private func addBox(toNode: SKNode) -> SKSpriteNode {
     let box = SKSpriteNode(color: .black, size: CGSize(width: 10, height: 10))
     box.zPosition = 5
@@ -38,10 +31,12 @@ final class Tester: SKScene {
     return returner
   }
   
-  private func isOverlapping(noded: SKNode) -> Bool {
+  private func isOverlapping(noded: SKNode, bkg: SKNode) -> Bool {
+    
+    guard let theParent = noded.parent else { fatalError("no parent") }
     
     checkRight: do {
-      var pos1 = convert(noded.frame.centerRight, from: noded.parent!) /// Start at right border.
+      var pos1 = convert(noded.frame.centerRight, from: theParent) /// Start at right border.
       pos1.x += 1                                                  /// Check to the right.
       if atPoint(pos1) != noded {
         if atPoint(pos1) == bkg { break checkRight } else { return true }
@@ -49,10 +44,10 @@ final class Tester: SKScene {
     }
     
     checkLeft: do {
-      pos1 = convert(noded.frame.centerLeft, from: noded.parent!) /// Continue at left border.
-      pos1.x -= 1                                                 /// Check to the left.
-      if atPoint(pos1) != noded {
-        if atPoint(pos1) == bkg { break checkLeft } else { return true }
+      var pos2 = convert(noded.frame.centerLeft, from: theParent) /// Continue at left border
+      pos2.x -= 1                                                 /// Check to the left.
+      if atPoint(pos2) != noded {
+        if atPoint(pos2) == bkg { break checkLeft } else { return true }
       }
     }
     
@@ -63,42 +58,91 @@ final class Tester: SKScene {
     return false
   }
   
-  override func didMove(to view: SKView) {
+  private func algo(superParent: SKNode) {
+   
     
     
-    goodStuff: do {
-      
-       let n1 = makeSprite(color: .cyan, name: "n1", theParent: self),
-       n2 = makeSprite(color: .red, name: "n2", theParent: n1),
-       n3 = makeSprite(color: .cyan, name: "n3", theParent: n2)
+  }
+  
+  private func overlappingTest() {
+    
+    let n1 = makeSprite(color: .cyan, name: "n1", theParent: self),
+    n2 = makeSprite(color: .red, name: "n2", theParent: n1),
+    n3 = makeSprite(color: .cyan, name: "n3", theParent: n2)
+    
+    
+    /// Background:
+    let bkg = SKSpriteNode(color: .gray, size: self.size)
+    addChild(bkg)
+    bkg.zPosition = -1
+    bkg.name = "bkg"
+    
+    /// Creation: (take note of parents!)
+    let o1        = makeSprite(color: .cyan, name: "o1",        theParent: self),
+    o2        = makeSprite(color: .red,  name: "o2",        theParent: o1),
+    o3        = makeSprite(color: .cyan, name: "o3",        theParent: o2),
+    o3sibling = makeSprite(color: .cyan, name: "o3sibling", theParent: o2),
+    
+    box       = addBox(toNode: self)
+    
+    /// Spacing:
+    o1.position.x += 35
+    o3.position.x += 18
+    o3sibling.position.x -= 17
+    
+    /// Tester:
+    
+    
+    print( isOverlapping(noded: o3sibling, bkg: bkg) )
+    
+  }
+  
+  /**************************************
+   ************************************/
  
-      
-      /// Background:
-      let bkg = SKSpriteNode(color: .gray, size: self.size)
-      addChild(bkg)
-      bkg.zPosition = -1
-      bkg.name = "bkg"
-      
-      /// Creation: (take note of parents!)
-      let o1        = makeSprite(color: .cyan, name: "o1",        theParent: self),
-          o2        = makeSprite(color: .red,  name: "o2",        theParent: o1),
-          o3        = makeSprite(color: .cyan, name: "o3",        theParent: o2),
-          o3sibling = makeSprite(color: .cyan, name: "o3sibling", theParent: o2),
-          
-          box       = addBox(toNode: self)
-      
-      /// Spacing:
-      o1.position.x += 35
-      o3.position.x += 18
-      o3sibling.position.x -= 17
-      
-      /// Tester:
-
-      
-      print( isOverlapping(noded: o3sibling) )
-      
-    }
+ 
+  override func didMove(to view: SKView) {
+    overlappingTest()
+  }
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     
+    SOlution: do {
+      let touch = touches.first
+      
+      let positionInScene = touch!.location(in: self)
+      
+      let allNodes = nodes(at: positionInScene)
+      
+      for node in allNodes {
+        
+        let nodePositionConverted = self.convert(node.position, from: node)
+        
+        let nodeFrameConverted
+          = CGRect(origin: CGPoint(x: nodePositionConverted.x - node.frame.maxX,
+                                   y: nodePositionConverted.y - node.frame.maxY),
+                   size: node.frame.size)
+     
+        /// Filter:
+        if nodeFrameConverted.contains(positionInScene), let n = node.name {
+          print(n)
+        }
+      }
+    }
+  }
+} /// EoC
+
+
+PlaygroundPage.current.liveView = Util.loadScene(Tester(size: CGSize(width: 400, height: 450)))
+
+func shittystuff() {
+  var top = Util.buildPrompt(),
+  topChildren = [Util.buildChoice(), Util.buildChoice()],
+  
+  second = [Util.buildPrompt(), Util.buildPrompt()],
+  secondChildren = [[Util.buildChoice(),Util.buildChoice()],
+                    [Util.buildChoice()]]
+
     junk: do {
       //addBox(toNode: o3sibling)
       
@@ -134,58 +178,4 @@ final class Tester: SKScene {
        conTop4 = convertPoint(fromView: top.position)/// -160, 184
        */
     }
-    
   }
-  
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    
-    craptard: do {
-      let preciseLocation = touches.first!.preciseLocation(in: self.view!)
-      
-      let convPLoc = convertPoint(fromView: preciseLocation)
-      let frame = atPoint(convPLoc).frame
-      
-      for node in nodes(at: convPLoc) {
-        if frame.intersects(node.frame) { print("hi") }
-      }
-      //      print(preciseLocation, convPLoc)
-      
-      print("\n")
-    }
-    
-    SOlution: do {/*
-       let touch = touches.first
-       
-       let positionInScene = touch!.location(in: self)
-       
-       let allNodes = nodes(at: positionInScene)
-       
-       for node in allNodes {
-       
-       let nodePositionConverted = self.convert(node.position, from: node)
-       
-       let nodeFrameConverted
-       = CGRect(origin: CGPoint(x: nodePositionConverted.x - node.frame.maxX,
-       y: nodePositionConverted.y - node.frame.maxY),
-       size: node.frame.size)
-       
-       if nodeFrameConverted.contains(positionInScene), let n = node.name {
-       print(n)
-       }
-       }*/
-    }
-    
-  }
-  
-  private func algo() {
-    var isOverlapped = true
-    /// Recursive:
-    func checkIt(node: SKNode) {
-      if isOverlapped { checkIt(node: node) }
-    }
-  }
-}
-
-
-PlaygroundPage.current.liveView = Util.loadScene(Tester(size: CGSize(width: 400, height: 450)))
-
