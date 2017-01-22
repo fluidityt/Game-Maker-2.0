@@ -32,7 +32,7 @@ final class Tester: SKScene {
   }
   
   /// Refac to "overlappedNode"
-  private func isOverlapping(noded: SKNode, bkg: SKNode) -> (result: Bool, node: SKNode?) {
+  private func overlappingCheck(noded: SKNode, bkg: SKNode) -> (result: Bool, node: SKNode?) {
     
     guard let theParent = noded.parent else { fatalError("no parent") }
     
@@ -111,13 +111,11 @@ final class Tester: SKScene {
     o3sibling.position.x -= 17
     
     /// Tester:
-    
-    let values = isOverlapping(noded: o3sibling, bkg: bkg)
-
+    let overlapped = overlappingCheck(noded: o3sibling, bkg: bkg)
     print("checking collision for o3sibling")
     
-    if values.result {
-      algo(collidedNode: values.node!, superParent: n1)
+    if overlapped.result == true {
+      algo(collidedNode: overlapped.node!, superParent: n1)
     }
     
   }
