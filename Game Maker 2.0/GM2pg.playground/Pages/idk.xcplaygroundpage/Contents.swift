@@ -2,9 +2,10 @@ import SpriteKit
 import PlaygroundSupport
 
 
+/// Addbox + Makesprite:
 final class Tester: SKScene {
   
-  private func addBox(toNode: SKNode) -> SKSpriteNode {
+  func addBox(toNode: SKNode) -> SKSpriteNode {
     let box = SKSpriteNode(color: .black, size: CGSize(width: 10, height: 10))
     box.zPosition = 5
     box.name = "box"
@@ -18,7 +19,7 @@ final class Tester: SKScene {
     return box
   }
   
-  private func makeSprite(color: SKColor,
+  func makeSprite(color: SKColor,
                           name: String,
                           theParent: SKNode) -> SKSpriteNode {
     
@@ -30,9 +31,12 @@ final class Tester: SKScene {
     
     return returner
   }
+}
+
+/// Overlap + Algo:
+extension Tester {
   
-  /// Refac to "overlappedNode"
-  private func overlappingCheck(noded: SKNode, bkg: SKNode) -> (result: Bool, node: SKNode?) {
+  func overlappingCheck(noded: SKNode, bkg: SKNode) -> (result: Bool, node: SKNode?) {
     
     guard let theParent = noded.parent else { fatalError("no parent") }
   
@@ -47,7 +51,7 @@ final class Tester: SKScene {
       var ticker = rangeLeft
       repeat {
         ticker += 1
-        print(atPoint( CGPoint(x: ticker, y: yVal) ).name)
+        /// print(atPoint( CGPoint(x: ticker, y: yVal) ).name)
       } while (ticker != rangeRight) && (atPoint(CGPoint(x: ticker, y: yVal)) == bkg)
       
       noded.zPosition = resetToThisPosition
@@ -73,11 +77,12 @@ final class Tester: SKScene {
       /// FIXME: Add this where if they are exactly on top of each other.. shift out a bit :P
     }
     
+    print("found nothing")
     return (false, nil)
   }
   
   /// Make sure superParent is correct:
-  private func moveAlgo(collidedNode: SKNode, superParent: SKNode) {
+  func moveAlgo(collidedNode: SKNode, superParent: SKNode) {
     
     print("collided node:", collidedNode.name!)
     
@@ -103,7 +108,7 @@ final class Tester: SKScene {
     
   }
   
-  private func overlappingTest() {
+  func overlappingTest() {
     
     /// Background:
     let bkg = SKSpriteNode(color: .gray, size: self.size)
@@ -111,10 +116,10 @@ final class Tester: SKScene {
     bkg.zPosition = -1
     bkg.name = "bkg"
     
-    /*/// Creation: (take note of parents!)
+    /// Creation: (take note of parents!)
     let n1 = makeSprite(color: .cyan, name: "n1", theParent: self),
         n2 = makeSprite(color: .red,  name: "n2", theParent: n1  ),
-        n3 = makeSprite(color: .cyan, name: "n3", theParent: n2  )*/
+        n3 = makeSprite(color: .cyan, name: "n3", theParent: n2  )
         
     let o1 = makeSprite(color: .cyan, name: "o1", theParent: self),
         o2 = makeSprite(color: .red,  name: "o2", theParent: o1  ),
@@ -138,41 +143,91 @@ final class Tester: SKScene {
     
   }
   
-  private func overlappingTest2() {
-    
-    /// Background:
-    let bkg = SKSpriteNode(color: .gray, size: self.size)
-    addChild(bkg)
-    bkg.zPosition = -1
-    bkg.name = "bkg"
+  func overlappingTest2() {
     
     /// Creation: (take note of parents!)
-    let n1 = makeSprite(color: .cyan, name: "n1", theParent: self),
+    let bkg = SKSpriteNode(color: .gray, size: self.size),
+        box = addBox(toNode: self),
+    
+        n1 = makeSprite(color: .cyan, name: "n1", theParent: self),
         n2 = makeSprite(color: .red,  name: "n2", theParent: n1  ),
         n3 = makeSprite(color: .cyan, name: "n3", theParent: n2  ),
-        
+    
         o1 = makeSprite(color: .cyan, name: "o1", theParent: self),
         o2 = makeSprite(color: .red,  name: "o2", theParent: o1  ),
         o3 = makeSprite(color: .cyan, name: "o3", theParent: o2  ),
-        
-        box = addBox(toNode: self),
+    
         o3sibling = makeSprite(color: .cyan, name: "o3sibling", theParent: o2)
-        
-    /// Spacing:
-    o1.position.x += 35
-    o3.position.x += 18
-    o3sibling.position.x -= 17
+    
+    setup: do {
+      /// Spacing:
+      o1.position.x += 35
+      o3.position.x += 18
+      o3sibling.position.x -= 17
+      
+      /// Background:
+      addChild(bkg)
+      bkg.zPosition = -1
+      bkg.name = "bkg"
+    }
     
     overlappingCheck(noded: o3sibling, bkg: bkg)
+  }
+}
+
+/// Sorting array stuff:
+extension Tester {
+
+  
+  
+  func sort(node: SKNode) {
+    
+    let theParent: SKNode
+    
+    find: do {
+      theParent = node.parent!
+    }
+    
+    draw: do {
+      
+    }
     
   }
   
-  /**************************************
-   ************************************/
-  
+  func sortTest() {
+    
+    /// Creation: (take note of parents!)
+    let bkg = SKSpriteNode(color: .gray, size: self.size),
+        box = addBox(toNode: self),
+    
+        o1 = makeSprite(color: .cyan, name: "o1", theParent: self),
+        o2 = makeSprite(color: .red,  name: "o2", theParent: o1  ),
+        o3 = makeSprite(color: .cyan, name: "o3", theParent: o2  ),
+    
+        o3sibling = makeSprite(color: .cyan, name: "o3sibling", theParent: o2),
+        o3sibSib  = makeSprite(color: .cyan, name: "o3sibSib" , theParent: o2)
+    
+    setup: do {
+      /// Spacing:
+      o1.position.x += 35
+      o3.position.x += 28
+      o3sibling.position.x -= 27
+      
+      /// Background:
+      addChild(bkg)
+      bkg.zPosition = -1
+      bkg.name = "bkg"
+    }
+
+    
+  }
+}
+
+/// DMV + TB:
+extension Tester {
   
   override func didMove(to view: SKView) {
-    overlappingTest2()
+    sortTest()
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
