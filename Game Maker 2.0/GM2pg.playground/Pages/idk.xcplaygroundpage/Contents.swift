@@ -58,10 +58,24 @@ final class Tester: SKScene {
     return false
   }
   
-  private func algo(superParent: SKNode) {
+  private func algo(startNode: SKNode, superParent: SKNode) {
    
+    var returner = SKNode()
     
+    /// Find the next-highest parent:
+    func highestParent(ofChildNode: SKNode) -> SKNode {
+
+      guard let theParent = ofChildNode.parent else { fatalError("no parent") }
+      print("parent:", theParent.name!)
+      
+      if theParent.name! == superParent.name! {
+        returner = ofChildNode
+      } else { highestParent(ofChildNode: theParent) }
+      
+      return returner
+    }
     
+    print( "highest parent of \(startNode.name!):", highestParent(ofChildNode: startNode).name! )
   }
   
   private func overlappingTest() {
@@ -79,11 +93,11 @@ final class Tester: SKScene {
     
     /// Creation: (take note of parents!)
     let o1        = makeSprite(color: .cyan, name: "o1",        theParent: self),
-    o2        = makeSprite(color: .red,  name: "o2",        theParent: o1),
-    o3        = makeSprite(color: .cyan, name: "o3",        theParent: o2),
-    o3sibling = makeSprite(color: .cyan, name: "o3sibling", theParent: o2),
-    
-    box       = addBox(toNode: self)
+        o2        = makeSprite(color: .red,  name: "o2",        theParent: o1),
+        o3        = makeSprite(color: .cyan, name: "o3",        theParent: o2),
+        o3sibling = makeSprite(color: .cyan, name: "o3sibling", theParent: o2),
+        
+        box       = addBox(toNode: self)
     
     /// Spacing:
     o1.position.x += 35
@@ -94,6 +108,7 @@ final class Tester: SKScene {
     
     
     print( isOverlapping(noded: o3sibling, bkg: bkg) )
+    algo(startNode: o3, superParent: o1)
     
   }
   
