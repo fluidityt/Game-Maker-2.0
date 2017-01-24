@@ -176,22 +176,34 @@ extension Tester {
 }
 
 /// Sorting array stuff:
+
+var sortTestNode = SKSpriteNode()
+
 extension Tester {
 
-  
-  
-  func sort(node: SKNode) {
+  final class Prompt: SKSpriteNode {
+
+    var column: Int = -1
     
-    let theParent: SKNode
-    
-    find: do {
-      theParent = node.parent!
+    static func ineet(to choice: Choice, title: String) -> Prompt {
+      let newPrompt        = SKSpriteNode(color: .cyan,
+                                          size: CGSize(width: 25, height: 25)); do {
+          newPrompt.column = (choice.column + 1)
+          newPrompt.name   = title
+      }
+      
+      return newPrompt
     }
+  }
+  
+  final class Choice: SKSpriteNode {
+  
+    var column: Int = -1
     
-    draw: do {
+    static func ineet(to prompt: Prompt) {
+      column = (prompt.column + 1)
       
     }
-    
   }
   
   func sortTest() {
@@ -199,27 +211,17 @@ extension Tester {
     /// Creation: (take note of parents!)
     let bkg = SKSpriteNode(color: .gray, size: self.size),
         box = addBox(toNode: self),
-    
         o1 = makeSprite(color: .cyan, name: "o1", theParent: self),
-        o2 = makeSprite(color: .red,  name: "o2", theParent: o1  ),
-        o3 = makeSprite(color: .cyan, name: "o3", theParent: o2  ),
-    
-        o3sibling = makeSprite(color: .cyan, name: "o3sibling", theParent: o2),
-        o3sibSib  = makeSprite(color: .cyan, name: "o3sibSib" , theParent: o2)
+        o2 = makeSprite(color: .red,  name: "o2", theParent: o1  )
     
     setup: do {
       /// Spacing:
       o1.position.x += 35
-      o3.position.x += 28
-      o3sibling.position.x -= 27
-      
       /// Background:
       addChild(bkg)
       bkg.zPosition = -1
       bkg.name = "bkg"
     }
-
-    
   }
 }
 
