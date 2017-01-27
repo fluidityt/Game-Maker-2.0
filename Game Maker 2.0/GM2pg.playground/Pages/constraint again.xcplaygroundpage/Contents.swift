@@ -92,6 +92,8 @@ enum Sys {                                            private init() { self = Sy
 didMoveToView: do {
   Sys.ineet()
   Sys.status()
+  
+  /// Set up stuff:
 }
 
 
