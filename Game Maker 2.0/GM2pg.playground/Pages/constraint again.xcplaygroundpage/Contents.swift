@@ -4,15 +4,15 @@ import SpriteKit
 class InGameElement {
   final var title = String()
   final var node = SKNode()
-}
+};
 
 final class Prompt: InGameElement {
   
-}
+};
 
 final class Choice: InGameElement {
   
-}
+};
 
 /// Holders:
 class Holder {
@@ -43,17 +43,17 @@ class Holder {
     /// ...
   }
   
-}
+};
 
 final class PromptHolder: Holder {
  
     var prompt: Prompt?
-}
+};
 
 final class ChoiceHolder: Holder {
   var choice: Choice?
   
-}
+};
 
 /// System stuff:
 enum Sys {                                            private init() { self = Sys() }
@@ -73,20 +73,25 @@ enum Sys {                                            private init() { self = Sy
   }
   
   static func ineet() {
-    setup: do {
-      print("hii")
-      holders[0] = [Holder()]
-      for _ in 2...10 {
-        holders.append([Holder()])
-      }
-    };
+    print("System initiate...")
+    holders[0] = [Holder()]
+    for _ in 2...10 { holders.append([Holder()]) }
   }
-}
+  
+  static func status() {
+    print("system has", holders.count, "maximum columns")
+    for i in 0...(holders.count - 1) {
+      print("column", i, "has", holders[i].count, "holders")
+    }
+
+  }
+  
+};
 
 /// Testing:
 didMoveToView: do {
   Sys.ineet()
-  
+  Sys.status()
 }
 
 
