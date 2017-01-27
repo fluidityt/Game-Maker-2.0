@@ -1,11 +1,18 @@
 import SpriteKit
 
+fileprivate var holders: [[Holder]]
+
 /// Classes:
-class Prompt {
+class InGameElement {
+  final var title = String()
+  final var node = SKNode()
+}
+
+final class Prompt: InGameElement {
   
 }
 
-class Choice {
+final class Choice: InGameElement {
   
 }
 
@@ -23,11 +30,11 @@ func addChoiceHolder(toPrompt prompt: Prompt) {
 /// Holders:
 class Holder {
 
-  var node = SKShapeNode()
+ final var node = SKShapeNode()
   
-  var children = [SKNode()]
+ final var children = [SKNode()]
   
-  func resize() {
+ final func resize() {
     
     func calculateSize() -> CGFloat {
       
@@ -45,28 +52,34 @@ class Holder {
     }
     
     node.xScale = calculateSize()
-    
     /// Node spacing:
     /// ...
   }
   
 }
 
-class PromptHolder: Holder {
+final class PromptHolder: Holder {
  
     var prompt: Prompt?
 }
 
-class ChoiceHolder: Holder {
+final class ChoiceHolder: Holder {
   var choice: Choice?
   
 }
 
 /// Testing: 
-do {
-    var x = 120.0
-  var y = 100.0
-  print(x/y)
+didMoveToView: do {
+  setup: do {
+    print("hii")
+    holders = [[Holder()]]
+    holders[0] = [Holder()]
+    for _ in 2...10 {
+      holders.append([Holder()])
+    }
+  };
+  
+  
 }
 
 
