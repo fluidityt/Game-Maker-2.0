@@ -1,6 +1,10 @@
 import SpriteKit
 import PlaygroundSupport
-
+/**
+ 
+ maybe i could make a recursive .convert() going through all the parents to find the right coords..
+ 
+ */
 
 /// Addbox + Makesprite:
 final class Tester: SKScene {
@@ -179,8 +183,6 @@ extension Tester {
 
 var sortTestNode = SKSpriteNode()
 
-extension Tester {
-
   final class Prompt: SKSpriteNode {
 
     var column: Int = -1
@@ -194,6 +196,10 @@ extension Tester {
       
       return newPrompt
     }
+    
+    func swapChild(choice1: Choice, with choice2: Choice) {}
+    func organizeChildren() {}
+    override func addChild(_ node: SKNode) { fatalError("don't do this") }
   }
   
   final class Choice: SKSpriteNode {
@@ -204,8 +210,13 @@ extension Tester {
       column = (prompt.column + 1)
       
     }
+    
+    override func addChild(_ node: SKNode) { fatalError("don't do this") }
+
   }
-  
+
+extension Tester {
+
   func sortTest() {
     
     /// Creation: (take note of parents!)
