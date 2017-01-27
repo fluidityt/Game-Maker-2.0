@@ -1,7 +1,5 @@
 import SpriteKit
 
-fileprivate var holders: [[Holder]]
-
 /// Classes:
 class InGameElement {
   final var title = String()
@@ -14,17 +12,6 @@ final class Prompt: InGameElement {
 
 final class Choice: InGameElement {
   
-}
-
-/// Util funcs:
-func addPrompt() {}
-func addPromptHolder(toChoice choice: Choice) {
-  addPrompt()
-}
-
-func addChoice(){}
-func addChoiceHolder(toPrompt prompt: Prompt) {
-  addChoice()
 }
 
 /// Holders:
@@ -68,17 +55,37 @@ final class ChoiceHolder: Holder {
   
 }
 
-/// Testing: 
-didMoveToView: do {
-  setup: do {
-    print("hii")
-    holders = [[Holder()]]
-    holders[0] = [Holder()]
-    for _ in 2...10 {
-      holders.append([Holder()])
-    }
-  };
+/// System stuff:
+enum Sys {                                            private init() { self = Sys() }
   
+  static var holders = [[Holder()]]
+  
+  static func addPrompt() {
+  }
+  static func addPromptHolder(toChoice choice: Choice) {
+    addPrompt()
+  }
+  
+  static func addChoice(){
+  }
+  static func addChoiceHolder(toPrompt prompt: Prompt) {
+    addChoice()
+  }
+  
+  static func ineet() {
+    setup: do {
+      print("hii")
+      holders[0] = [Holder()]
+      for _ in 2...10 {
+        holders.append([Holder()])
+      }
+    };
+  }
+}
+
+/// Testing:
+didMoveToView: do {
+  Sys.ineet()
   
 }
 
