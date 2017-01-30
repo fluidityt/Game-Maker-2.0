@@ -52,7 +52,7 @@ class Holder {
 };
 
 final class PromptHolder: Holder {
-  var prompt = Prompt(title: "default prompt")
+  var prompts = [Prompt]()
 };
 
 final class ChoiceHolder: Holder {
@@ -98,24 +98,28 @@ enum Sys {                                            private init() { self = Sy
     holders[0] = [Holder()]
     for _ in 2...10 { holders.append([Holder()]) }
     
-    /** Make super-prompt and prompt holders:
-   - make super holder
-   - make super prompt
-   - make choice holder
-   - add choice holder to super prompt
-   - place super prompt in super holder */
+    /// Make first stuff:
+    let superHolder = PromptHolder()
+    let superPrompt = Prompt(title: "super P")
+    let choiceHolder = ChoiceHolder()
     
+    superPrompt.subsequentChoiceHolder = choiceHolder
+    superHolder.prompt.append(superPrompt)
+    selected = superPrompt
+  
+    /// How do I register this? OH right, a search algo =/ or threaded while..
   }
   
   static func status() {
+    print("selected is", selected.title)
     print("system has", holders.count, "maximum columns")
     for i in 0...(holders.count - 1) {
       
       switch holders[i][0] {
         case is PromptHolder, is ChoiceHolder:
           print("column", i, "has", holders[i].count, "holders")
-        default:
-          print("column", i, "has 0 real holders")
+        default: ()
+        
       }
     }
     newLine()
@@ -137,6 +141,7 @@ didMoveToView: do {
    - make choice holder
    - add choice holder to super prompt
    - place super prompt in super holder
+   - register in .holders
    
    part 2:
    - select super prompt
@@ -144,6 +149,7 @@ didMoveToView: do {
    - make new prompt holder
    - add prompt holder to choice
    - add default choice to super prompt's choice holder
+   - register in .holders
    
    part 3:
    - select default choice
@@ -151,7 +157,7 @@ didMoveToView: do {
    - make new choice holder
    - add choice holder to new prompt
    - add new prompt to choice's prompt holder
-   
+   - register in .holders
  */
   
 }
