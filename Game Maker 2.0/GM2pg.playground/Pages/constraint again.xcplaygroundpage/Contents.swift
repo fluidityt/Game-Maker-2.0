@@ -3,8 +3,8 @@ func newLine() { print("\n") }
 
 /// Classes:
 class InGameElement {
-  final var title = String()
-  final var node = SKNode()
+  final var title = String(),
+            node = SKNode()
   
   init(title: String) { self.title = title }
 };
@@ -70,14 +70,14 @@ enum Sys {                                            private init() { self = Sy
     
     print("adding prompt..")
     if selected is Choice {
-        let sel = selected as! Choice
-        sel.subsequentPrompt = prompt
+      let sel = selected as! Choice
+      sel.subsequentPrompt = prompt
     } else { print("--can't add prompt") }
     newLine()
     
-      static func addChoiceHolder(toPrompt prompt: Prompt) {
-    //addChoice()
-  }
+    static func addChoiceHolder(toPrompt prompt: Prompt) {
+      //addChoice()
+    }
   }
   
   static func addChoice(_ choice: Choice){
@@ -89,8 +89,8 @@ enum Sys {                                            private init() { self = Sy
     newLine()
     
     static func addPromptHolder(toChoice choice: Choice) {
-    //addPrompt()
-  }
+      //addPrompt()
+    }
   }
 
   static func ineet() {
@@ -99,9 +99,9 @@ enum Sys {                                            private init() { self = Sy
     for _ in 2...10 { holders.append([Holder()]) }
     
     /// Make first stuff:
-    let superHolder = PromptHolder()
-    let superPrompt = Prompt(title: "super P")
-    let choiceHolder = ChoiceHolder()
+    let superHolder = PromptHolder(),
+        superPrompt = Prompt(title: "super P"),
+        choiceHolder = ChoiceHolder()
     
     superPrompt.subsequentChoiceHolder = choiceHolder
     superHolder.prompt.append(superPrompt)
@@ -115,6 +115,7 @@ enum Sys {                                            private init() { self = Sy
          - if you know the position of one thing, then the immediate things around
            it you should know too.. such as if you add a new thing to that known
            thing or, if you delete from that known thing--you will know where you are.
+         - cache nearby shit (scenes?)
      */
  
   }
