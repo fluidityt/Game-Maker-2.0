@@ -9,16 +9,16 @@ class InGameElement {
   init(title: String) { self.title = title }
 };
 
-/// Shouldn't these be holders?
 final class Prompt: InGameElement {
   var subsequentChoiceHolder = ChoiceHolder()
 };
 
+/// FIXME: SHould be a holder member..
 final class Choice: InGameElement {
   var subsequentPrompt = Prompt(title: "default prompt")
 };
 
-/// Holders this needs work...:
+/// FIXME: Holders this needs work...:
 class Holder {
   
   final var node = SKShapeNode()
@@ -107,7 +107,16 @@ enum Sys {                                            private init() { self = Sy
     superHolder.prompt.append(superPrompt)
     selected = superPrompt
   
-    /// How do I register this? OH right, a search algo =/ or threaded while..
+    /** How do I register this? OH right, a search algo =/ or threaded while..
+        solutions:
+         - thread an updater that goes through and assigns a grid location
+         - check relative Y positions (no way X could work)
+         - check for number of parents (thus giving you row #)
+         - if you know the position of one thing, then the immediate things around
+           it you should know too.. such as if you add a new thing to that known
+           thing or, if you delete from that known thing--you will know where you are.
+     */
+ 
   }
   
   static func status() {
