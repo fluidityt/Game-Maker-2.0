@@ -65,22 +65,6 @@ enum Sys {                                            private init() { self = Sy
   static var holders = [[Holder()]]
   
   static var selected = InGameElement(title: "default")
-
-  /////
-  
-  static func addSuperPromptHolder(superPrompt: Prompt) {
-    
-  }
-  
-  static func addPromptHolder(toChoice choice: Choice) {
-    //addPrompt()
-  }
-  
-  static func addChoiceHolder(toPrompt prompt: Prompt) {
-    //addChoice()
-  }
-  
-  /////
   
   static func addPrompt(_ prompt: Prompt) {
     
@@ -90,6 +74,10 @@ enum Sys {                                            private init() { self = Sy
         sel.subsequentPrompt = prompt
     } else { print("--can't add prompt") }
     newLine()
+    
+      static func addChoiceHolder(toPrompt prompt: Prompt) {
+    //addChoice()
+  }
   }
   
   static func addChoice(_ choice: Choice){
@@ -99,12 +87,24 @@ enum Sys {                                            private init() { self = Sy
       sel.subsequentChoiceHolder.choices.append(choice)
     } else { print("can't add choice") }
     newLine()
+    
+    static func addPromptHolder(toChoice choice: Choice) {
+    //addPrompt()
+  }
   }
 
   static func ineet() {
     print("System initiate...")
     holders[0] = [Holder()]
     for _ in 2...10 { holders.append([Holder()]) }
+    
+    /** Make super-prompt and prompt holders:
+   - make super holder
+   - make super prompt
+   - make choice holder
+   - add choice holder to super prompt
+   - place super prompt in super holder */
+    
   }
   
   static func status() {
