@@ -4,7 +4,7 @@ enum Sys {
   
   static var holders = [[Holder()]]
   
-  static var selected = InGameElement(title: "default")
+  static var selected = InGameElement(coder: NSCoder())
   
   static var selectedsRow = 0
   
@@ -45,7 +45,7 @@ enum Sys {
         superPrompt = Prompt(title: "super P"),
         choiceHolder = ChoiceHolder()
     
-    superPrompt.subsequentChoiceHolder = choiceHolder
+    superPrompt.addChild(choiceHolder)
     superHolder.prompts.append(superPrompt)
     
     holders[0][0] = superHolder

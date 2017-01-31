@@ -5,7 +5,7 @@ public func didMoveToView() {
   Sys.ineet()
   Sys.status()
 
-
+setupProcessComments: do {
   /**
    part 1:
    - make super holder
@@ -40,6 +40,15 @@ public func didMoveToView() {
      it you should know too.. such as if you add a new thing to that known
      thing or, if you delete from that known thing--you will know where you are.
    - cache nearby shit (scenes?)
- */
-
+   */
+  }
+  
+  todoComments: do {
+    // TODO: TODO:
+    /**
+     TODO:
+     - make gameover default node
+     - put holder code inside prompt and choice inits
+    */
+  }
 }

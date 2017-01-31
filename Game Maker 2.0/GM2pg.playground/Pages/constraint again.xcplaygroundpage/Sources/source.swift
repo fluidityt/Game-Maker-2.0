@@ -17,8 +17,10 @@ class InGameElement: SKSpriteNode {
 };
 
 final class Prompt: InGameElement {
+  /// Holder should be created but with a GAME OVER content
+  let childHolder = ChoiceHolder()
   
-  var childChoices: [Choice] {
+  func childChoices() -> [Choice] {
     var choices = [Choice]()
     for child in children[0].children {
       choices.append(child as! Choice)
@@ -37,7 +39,7 @@ final class Prompt: InGameElement {
 /// FIXME: SHould be a holder member..
 final class Choice: InGameElement {
   
-  var childPrompt: Prompt { return children[0].children[0] as! Prompt }
+  func childPrompt() -> Prompt { return children[0].children[0] as! Prompt }
   
   init(title: String) {
     super.init(title: title, color: .yellow, size: CGSize(width: 100, height: 50))
@@ -51,8 +53,7 @@ final class Choice: InGameElement {
 ///********************************///
 
 /// FIXME: Holders this needs work...:
-class Holder {
-  final var node = SKShapeNode()
+class Holder: SKSpriteNode {
 };
 
 final class PromptHolder: Holder {
