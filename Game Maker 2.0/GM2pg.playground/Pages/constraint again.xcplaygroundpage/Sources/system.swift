@@ -51,7 +51,7 @@ enum Sys {
   /** Utility: Does stuff in general.*/
   private enum Utl {
     
-    static func findRow(ofIGE startingIGE: InGameElement) -> Int { // Enumerate based on parents... with superPrompt being row 0 */
+    static func findRow(ofIGE startingIGE: InGameElement) -> Int {  // Enumerate based on parents... with superPrompt being row 0 */
       
       var currentIGE = startingIGE
       var counter = -1
@@ -63,9 +63,10 @@ enum Sys {
         guard let igeHolder = currentIGE.parent else { fatalError("ige has no holder") }
         
         guard let foundParent = igeHolder.parent else {             // We found no parent.. SP?
-          assert(currentIGE.title == Prompt.superPromptTitle, "super parent was NOT super prompt..")
+          assert(currentIGE.title == Prompt.superPromptTitle,
+                 "super parent was NOT super prompt..")
     
-          // We found our super prompt... counter should be == our row#.. exit loop.
+          // We found our super prompt... counter should be == our row#.. exit loop:
           print("SuperPrompt found. Row # is \(counter)")
           newLine()
           return counter
@@ -74,12 +75,15 @@ enum Sys {
         if let foundIGE = foundParent as? InGameElement {
           currentIGE = foundIGE                                     // Restart loop!
         } else { fatalError("found parent was not an IGE") }
-      
       }
       
       fatalError("loop exited and wasn't supposed to.")
     }
     
+    static func findRowTest() {
+      /// do this first
+      
+    }
     static func addChoiceHolder(toPrompt prompt: Prompt) {
       
     }
@@ -105,11 +109,6 @@ enum Sys {
     
     selected = superPrompt
     selectedsRow = 0
-    
-    /// holder work vs IGE work...
-    /// Holders are for drawing, IGE is for game engine logic
-    /// Each mod must alterar both...
-    
     
   }
   
