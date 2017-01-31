@@ -14,6 +14,8 @@ class InGameElement: SKSpriteNode {
 
 final class Prompt: InGameElement {
   
+  static let superPromptTitle = "SuperPrompt"
+  
   init(title: String) {
     /// Holder should be created but with a GAME OVER content
     super.init(title: title, color: .red, size: CGSize(width: 50, height: 50))

@@ -1,15 +1,14 @@
-import Foundation
+import SpriteKit
 
 enum Sys {
   
-  static var holders = [[Holder()]]
+  private static var
+  holders = [[Holder()]],
+  selected = InGameElement(title: "", color: .black, size: CGSize.zero),
+  selectedsRow = 0  // This will be a chore to update...
   
-  static var selected = InGameElement(coder: NSCoder())
-  
-  static var selectedsRow = 0
-  
-  /// Does stuff based on Sys.selection
-  enum Btn {
+  /** Button: Does stuff based on Sys.selection.*/
+  private enum Btn {
     
     static func addPrompt(_ prompt: Prompt) {
       print("adding prompt..")
@@ -32,20 +31,60 @@ enum Sys {
     
     static func addChoice(_ choice: Choice){
       print("adding choice..")
-      if selected is Prompt {
-        let sel = selected as! Prompt
-        //  sel.subsequentChoiceHolder.choices.append(choice)
-      } else { print("can't add choice") }
-      newLine()
-    }
+      
+      guard let sel = (selected as? Prompt) else {
+        print("--can't add prompt: sel isn't Prompt")
+        return
+      }
+      guard let holder = sel.children.first else {              // Check if has child.
+        /// Create a holder:
+        return
+      }
+      guard let choiceHolder = (holder as? ChoiceHolder) else { // Check if child is CH.
+        fatalError("has child but not a CH")
+      }
+      
+      choiceHolder.choices.append(choice)
+      newLine()    }
   };
   
-  enum Utl {
-    static func util_addChoiceHolder(toPrompt prompt: Prompt) {
+  /** Utility: Does stuff in general.*/
+  private enum Utl {
+    
+    static func findRow(ofIGE startingIGE: InGameElement) -> Int { // Enumerate based on parents... with superPrompt being row 0 */
+      
+      var currentIGE = startingIGE
+      var counter = -1
+      
+      print("Finding row for \(startingIGE.title)")
+      while counter != 1000 {                                       // 1000 is just a prevention for perma-run
+        counter += 1
+        
+        guard let igeHolder = currentIGE.parent else { fatalError("ige has no holder") }
+        
+        guard let foundParent = igeHolder.parent else {             // We found no parent.. SP?
+          assert(currentIGE.title == Prompt.superPromptTitle, "super parent was NOT super prompt..")
+    
+          // We found our super prompt... counter should be == our row#.. exit loop.
+          print("SuperPrompt found. Row # is \(counter)")
+          newLine()
+          return counter
+        }
+        
+        if let foundIGE = foundParent as? InGameElement {
+          currentIGE = foundIGE                                     // Restart loop!
+        } else { fatalError("found parent was not an IGE") }
+      
+      }
+      
+      fatalError("loop exited and wasn't supposed to.")
+    }
+    
+    static func addChoiceHolder(toPrompt prompt: Prompt) {
       
     }
     
-    static func util_addPromptHolder(toChoice choice: Choice) {
+    static func addPromptHolder(toChoice choice: Choice) {
       
     }
   };
@@ -58,19 +97,16 @@ enum Sys {
     /// Make first stuff:
     let
     superHolder = PromptHolder(),
-    superPrompt = Prompt(title: "super P"),
-    choiceHolder = ChoiceHolder()
+    superPrompt = Prompt(title: "super P")
     
-    superPrompt.addChild(choiceHolder)
     superHolder.prompts.append(superPrompt)
     
     holders[0][0] = superHolder
-    holders[1][0] = choiceHolder
     
     selected = superPrompt
     selectedsRow = 0
     
-    /// holder work vs IGE work... 
+    /// holder work vs IGE work...
     /// Holders are for drawing, IGE is for game engine logic
     /// Each mod must alterar both...
     
