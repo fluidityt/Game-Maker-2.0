@@ -5,6 +5,7 @@ enum Sys {
   static var holders = [[Holder()]]
   
   static var selected = InGameElement(title: "default")
+  static var selectedsRow = 0
   
   static func addPrompt(_ prompt: Prompt) {
     
@@ -16,9 +17,8 @@ enum Sys {
     newLine()
   }
   static func addChoiceHolder(toPrompt prompt: Prompt) {
-    //addChoice()
-  }
   
+  }
   
   static func addChoice(_ choice: Choice){
     print("adding choice..")
@@ -30,9 +30,8 @@ enum Sys {
   }
   
   static func addPromptHolder(toChoice choice: Choice) {
-    //addPrompt()
+    
   }
-  
   
   static func ineet() {
     print("System initiate...")
@@ -41,23 +40,22 @@ enum Sys {
     
     /// Make first stuff:
     let superHolder = PromptHolder(),
-    superPrompt = Prompt(title: "super P"),
-    choiceHolder = ChoiceHolder()
+        superPrompt = Prompt(title: "super P"),
+        choiceHolder = ChoiceHolder()
     
     superPrompt.subsequentChoiceHolder = choiceHolder
     superHolder.prompts.append(superPrompt)
-    selected = superPrompt
     
-    /** How do I register this? OH right, a search algo =/ or threaded while..
-     solutions:
-     - thread an updater that goes through and assigns a grid location
-     - check relative Y positions (no way X could work)
-     - check for number of parents (thus giving you row #)
-     - if you know the position of one thing, then the immediate things around
-     it you should know too.. such as if you add a new thing to that known
-     thing or, if you delete from that known thing--you will know where you are.
-     - cache nearby shit (scenes?)
-     */
+    holders[0][0] = superHolder
+    holders[1][0] = choiceHolder
+    
+    selected = superPrompt
+    selectedsRow = 0
+    
+    /// holder work vs IGE work... 
+    /// Holders are for drawing, IGE is for game engine logic
+    /// Each mod must alterar both...
+    
     
   }
   
