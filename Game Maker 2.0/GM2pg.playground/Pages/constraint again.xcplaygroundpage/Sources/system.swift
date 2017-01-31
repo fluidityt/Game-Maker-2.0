@@ -5,6 +5,7 @@ enum Sys {
   static var holders = [[Holder()]]
   
   static var selected = InGameElement(title: "default")
+  
   static var selectedsRow = 0
   
   static func addPrompt(_ prompt: Prompt) {
@@ -16,6 +17,7 @@ enum Sys {
     } else { print("--can't add prompt") }
     newLine()
   }
+  
   static func addChoiceHolder(toPrompt prompt: Prompt) {
   
   }
