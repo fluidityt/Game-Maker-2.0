@@ -8,32 +8,47 @@ enum Sys {
   
   static var selectedsRow = 0
   
-  static func btn_addPrompt(_ prompt: Prompt) {
+  /// Does stuff based on Sys.selection
+  enum Btn {
     
-    print("adding prompt..")
-    if selected is Choice {
-      let sel = selected as! Choice
-      // sel.subsequentPrompt = prompt
-    } else { print("--can't add prompt") }
-    newLine()
-  }
-  
-  static func util_addChoiceHolder(toPrompt prompt: Prompt) {
-  
-  }
-  
-  static func btn_addChoice(_ choice: Choice){
-    print("adding choice..")
-    if selected is Prompt {
-      let sel = selected as! Prompt
-      //  sel.subsequentChoiceHolder.choices.append(choice)
-    } else { print("can't add choice") }
-    newLine()
-  }
-  
-  static func util_addPromptHolder(toChoice choice: Choice) {
+    static func addPrompt(_ prompt: Prompt) {
+      print("adding prompt..")
+      
+      guard let sel = (selected as? Choice) else {
+        print("--can't add prompt: sel isn't Choice")
+        return
+      }
+      guard let holder = sel.children.first else {              // Check if has child.
+        /// Create a holder:
+        return
+      }
+      guard let promptHolder = (holder as? PromptHolder) else { // Check if child is PH.
+        fatalError("has child but not a PH")
+      }
+      
+      promptHolder.prompts.append(prompt)
+      newLine()
+    }
     
-  }
+    static func addChoice(_ choice: Choice){
+      print("adding choice..")
+      if selected is Prompt {
+        let sel = selected as! Prompt
+        //  sel.subsequentChoiceHolder.choices.append(choice)
+      } else { print("can't add choice") }
+      newLine()
+    }
+  };
+  
+  enum Utl {
+    static func util_addChoiceHolder(toPrompt prompt: Prompt) {
+      
+    }
+    
+    static func util_addPromptHolder(toChoice choice: Choice) {
+      
+    }
+  };
   
   static func ineet() {
     print("System initiate...")
