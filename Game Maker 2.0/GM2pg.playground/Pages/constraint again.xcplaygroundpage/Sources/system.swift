@@ -8,30 +8,30 @@ enum Sys {
   
   static var selectedsRow = 0
   
-  static func addPrompt(_ prompt: Prompt) {
+  static func btn_addPrompt(_ prompt: Prompt) {
     
     print("adding prompt..")
     if selected is Choice {
       let sel = selected as! Choice
-      sel.subsequentPrompt = prompt
+      // sel.subsequentPrompt = prompt
     } else { print("--can't add prompt") }
     newLine()
   }
   
-  static func addChoiceHolder(toPrompt prompt: Prompt) {
+  static func util_addChoiceHolder(toPrompt prompt: Prompt) {
   
   }
   
-  static func addChoice(_ choice: Choice){
+  static func btn_addChoice(_ choice: Choice){
     print("adding choice..")
     if selected is Prompt {
       let sel = selected as! Prompt
-      sel.subsequentChoiceHolder.choices.append(choice)
+      //  sel.subsequentChoiceHolder.choices.append(choice)
     } else { print("can't add choice") }
     newLine()
   }
   
-  static func addPromptHolder(toChoice choice: Choice) {
+  static func util_addPromptHolder(toChoice choice: Choice) {
     
   }
   
@@ -41,9 +41,10 @@ enum Sys {
     for _ in 2...10 { holders.append([Holder()]) }
     
     /// Make first stuff:
-    let superHolder = PromptHolder(),
-        superPrompt = Prompt(title: "super P"),
-        choiceHolder = ChoiceHolder()
+    let
+    superHolder = PromptHolder(),
+    superPrompt = Prompt(title: "super P"),
+    choiceHolder = ChoiceHolder()
     
     superPrompt.addChild(choiceHolder)
     superHolder.prompts.append(superPrompt)

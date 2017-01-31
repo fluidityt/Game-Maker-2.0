@@ -3,17 +3,15 @@ func newLine() { print("\n") }
 
 /// Classes:
 class InGameElement: SKSpriteNode {
-  final var title = String(),
-            node = SKNode()
+  final var
+  title: String,
+  childHolder: Holder
   
   init(title: String, color: SKColor, size: CGSize) {
     super.init(texture: nil, color: color, size: size)
     self.title = title
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(texture: nil, color: .black, size: CGSize.zero)
-  }
+    
+  }                                                                                 ; required init?(coder aDecoder: NSCoder) { super.init(texture: nil, color: .black, size: CGSize.zero) }
 };
 
 final class Prompt: InGameElement {
@@ -30,35 +28,31 @@ final class Prompt: InGameElement {
   
   init(title: String) {
     super.init(title: title, color: .red, size: CGSize(width: 50, height: 50))
-  }
-  
-  required init?(coder aDecoder: NSCoder) {super.init(coder: NSCoder())}
+  }                                                                                 ; required init?(coder aDecoder: NSCoder) {super.init(coder: NSCoder())}
   
 };
 
-/// FIXME: SHould be a holder member..
 final class Choice: InGameElement {
+  
+  let childHolder =
   
   func childPrompt() -> Prompt { return children[0].children[0] as! Prompt }
   
   init(title: String) {
     super.init(title: title, color: .yellow, size: CGSize(width: 100, height: 50))
-  }
-  
-  required init?(coder aDecoder: NSCoder) {super.init(coder: NSCoder())}
+  }                                                                                 ; required init?(coder aDecoder: NSCoder) {super.init(coder: NSCoder())}
   
 };
 
 
-///********************************///
-
-/// FIXME: Holders this needs work...:
 class Holder: SKSpriteNode {
 };
 
 final class PromptHolder: Holder {
   var prompts = [Prompt]()
 };
+
+
 
 final class ChoiceHolder: Holder {
   var choices = [Choice]()
