@@ -2,13 +2,13 @@ import SpriteKit
 
 enum Sys {
   
-  private static var
+  static var
   holders = [[Holder()]],
   selected = InGameElement(title: "", color: .black, size: CGSize.zero),
   selectedsRow = 0  // This will be a chore to update...
   
   /** Button: Does stuff based on Sys.selection.*/
-  private enum Btn {
+  enum Btn {
     
     static func addPrompt(_ prompt: Prompt) {
       print("adding prompt..")
@@ -29,7 +29,7 @@ enum Sys {
       newLine()
     }
     
-    static func addChoice(_ choice: Choice){
+    static func addChoice(_ choice: Choice = Choice(title: "anew choice")){
       print("adding choice..")
       
       guard let sel = (selected as? Prompt) else {
@@ -37,19 +37,24 @@ enum Sys {
         return
       }
       guard let holder = sel.children.first else {              // Check if has child.
-        /// Create a holder:
+        let newHolder = ChoiceHolder()                          // Create a holder since guard failed.
+        sel.addChild(newHolder)
+        
+        newHolder.addChild(choice)                              // Finish our primary task.
+        selected = choice
         return
       }
       guard let choiceHolder = (holder as? ChoiceHolder) else { // Check if child is CH.
         fatalError("has child but not a CH")
       }
       
-      choiceHolder.choices.append(choice)
+      choiceHolder.addChild(choice)
+      selected = choice
       newLine()    }
   };
   
   /** Utility: Does stuff in general.*/
-  private enum Utl {
+  enum Utl {
     
     static func findRow(ofIGE startingIGE: InGameElement) -> Int {  // Enumerate based on parents... with superPrompt being row 0 */
       
@@ -80,10 +85,6 @@ enum Sys {
       fatalError("loop exited and wasn't supposed to.")
     }
     
-    static func findRowTest() {
-      /// do this first
-      
-    }
     static func addChoiceHolder(toPrompt prompt: Prompt) {
       
     }

@@ -44,6 +44,5 @@ final class ChoiceHolder: Holder {
 };
 
 final class RefHolder {
- var val = Holder()
+  var val = Holder()
 };
-
