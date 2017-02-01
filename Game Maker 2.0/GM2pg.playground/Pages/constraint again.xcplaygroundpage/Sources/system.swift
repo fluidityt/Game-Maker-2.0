@@ -10,47 +10,64 @@ enum Sys {
   /** Button: Does stuff based on Sys.selection.*/
   enum Btn {
     
-    static func addPrompt(_ prompt: Prompt) {
-      print("adding prompt..")
+    static func addPrompt(_ prompt: Prompt = Prompt(title: "anew prompt")){
+      let title = prompt.title
+      print("adding prompt <\(title)>..")
+      
+      func finishUp(holder: Holder) {                           // Call before func returns.
+        holder.addChild(prompt)
+        selected = prompt
+        print("added prompt <\(title)>.")
+        newLine()
+      }
       
       guard let sel = (selected as? Choice) else {
-        print("--can't add prompt: sel isn't Choice")
+        print("--can't add prompt <\(title)>: sel isn't Choice")
         return
       }
       guard let holder = sel.children.first else {              // Check if has child.
-        /// Create a holder:
+        let newHolder = PromptHolder()                          // Create a holder since guard failed.
+        sel.addChild(newHolder)
+        
+        finishUp(holder: newHolder)
         return
       }
       guard let promptHolder = (holder as? PromptHolder) else { // Check if child is PH.
-        fatalError("has child but not a PH")
+        fatalError("<\(title)> has child but not a PH")
       }
       
-      promptHolder.prompts.append(prompt)
-      newLine()
+      finishUp(holder: promptHolder)
     }
     
+    
     static func addChoice(_ choice: Choice = Choice(title: "anew choice")){
-      print("adding choice..")
+      let title = choice.title
+      print("adding choice <\(title)>..")
+      
+      func finishUp(holder: Holder) {                           // Call before func returns.
+        holder.addChild(choice)
+        selected = choice
+        print("added choice <\(title)>")
+        newLine()
+      }
       
       guard let sel = (selected as? Prompt) else {
-        print("--can't add prompt: sel isn't Prompt")
+        print("--can't add choice <\(title)>: sel isn't Prompt")
         return
       }
       guard let holder = sel.children.first else {              // Check if has child.
         let newHolder = ChoiceHolder()                          // Create a holder since guard failed.
         sel.addChild(newHolder)
         
-        newHolder.addChild(choice)                              // Finish our primary task.
-        selected = choice
+        finishUp(holder: newHolder)
         return
       }
       guard let choiceHolder = (holder as? ChoiceHolder) else { // Check if child is CH.
-        fatalError("has child but not a CH")
+        fatalError("<\(title)>has child but not a CH")
       }
       
-      choiceHolder.addChild(choice)
-      selected = choice
-      newLine()    }
+      finishUp(holder: choiceHolder)
+    }
   };
   
   /** Utility: Does stuff in general.*/
@@ -85,13 +102,6 @@ enum Sys {
       fatalError("loop exited and wasn't supposed to.")
     }
     
-    static func addChoiceHolder(toPrompt prompt: Prompt) {
-      
-    }
-    
-    static func addPromptHolder(toChoice choice: Choice) {
-      
-    }
   };
   
   static func ineet() {
@@ -104,7 +114,7 @@ enum Sys {
     superHolder = PromptHolder(),
     superPrompt = Prompt(title: "super P")
     
-    superHolder.prompts.append(superPrompt)
+    //superHolder.prompts.append(superPrompt)
     
     holders[0][0] = superHolder
     

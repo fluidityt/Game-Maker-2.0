@@ -1,52 +1,11 @@
 import SpriteKit
 
-extension Sys.Utl {
-  static func findRowTest() {
-    /// do this first
-    
-    let superHolder = PromptHolder()
-    let superPrompt = Prompt(title: Prompt.superPromptTitle)
-    superHolder.addChild(superPrompt)
-    
-    let secondHolder = ChoiceHolder()
-    let secondChoice = Choice(title: "choicer")
-    secondHolder.addChild(secondChoice)
-    superPrompt.addChild(secondHolder)
-    
-    let secondPromptHolder = PromptHolder()
-    let secondPrompt = Prompt(title: "ss")
-    secondPromptHolder.addChild(secondPrompt)
-    secondChoice.addChild(secondPromptHolder)
-    
-    
-    print(findRow(ofIGE: secondPrompt))   
-  }
-}
-
-extension Sys.Btn {
-  static func addChoiceTest() {
-    let superHolder = PromptHolder()
-    let superPrompt = Prompt(title: Prompt.superPromptTitle)
-    superHolder.addChild(superPrompt)
-
-    // Round 1:
-    Sys.selected = superPrompt
-    addChoice()
-    Sys.Utl.findRow(ofIGE: Sys.selected)
-    
-    // Round 2:
-    Sys.selected = superPrompt
-    addChoice()
-    Sys.Utl.findRow(ofIGE: Sys.selected)
-  }
-}
-
 /// Testing:
 public func didMoveToView() {
   Sys.ineet()
   //  Sys.status()
   //  Sys.Utl.findRowTest()
-  Sys.Btn.addChoiceTest()
+    Sys.Btn.addChoiceAndPromptTest()
 
 setupProcessComments: do {
   /**
@@ -91,7 +50,53 @@ setupProcessComments: do {
     /**
      TODO:
      - make gameover default node
-     - put holder code inside prompt and choice inits
+     - make test for Btn.addPrompt()
     */
   }
 }
+
+extension Sys.Utl {
+  static func findRowTest() {
+    /// do this first
+    
+    let superHolder = PromptHolder()
+    let superPrompt = Prompt(title: Prompt.superPromptTitle)
+    superHolder.addChild(superPrompt)
+    
+    let secondHolder = ChoiceHolder()
+    let secondChoice = Choice(title: "choicer")
+    secondHolder.addChild(secondChoice)
+    superPrompt.addChild(secondHolder)
+    
+    let secondPromptHolder = PromptHolder()
+    let secondPrompt = Prompt(title: "ss")
+    secondPromptHolder.addChild(secondPrompt)
+    secondChoice.addChild(secondPromptHolder)
+    
+    
+    print(findRow(ofIGE: secondPrompt))   
+  }
+}
+
+extension Sys.Btn {
+  static func addChoiceAndPromptTest() {
+    let superHolder = PromptHolder()
+    let superPrompt = Prompt(title: Prompt.superPromptTitle)
+    superHolder.addChild(superPrompt)
+
+    // Round 1:
+    Sys.selected = superPrompt
+    addChoice()
+    Sys.Utl.findRow(ofIGE: Sys.selected)
+    
+    // Round 2:
+    Sys.selected = superPrompt
+    addChoice()
+    Sys.Utl.findRow(ofIGE: Sys.selected)
+    
+    addPrompt()
+    Sys.Utl.findRow(ofIGE: Sys.selected)
+
+  }
+}
+

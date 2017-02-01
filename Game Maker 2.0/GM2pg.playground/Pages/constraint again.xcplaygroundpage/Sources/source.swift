@@ -36,11 +36,11 @@ class Holder: SKSpriteNode {
 };
 
 final class PromptHolder: Holder {
-  var prompts = [Prompt]()
+  
 };
 
 final class ChoiceHolder: Holder {
-  var choices = [Choice]()
+
 };
 
 final class RefHolder {
